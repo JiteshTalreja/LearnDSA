@@ -1,0 +1,58 @@
+# Byte-compiled / caching
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Distribution / packaging
+build/
+dist/
+*.egg-info/
+.eggs/
+
+# Virtual environments
+.env
+.venv/
+venv/
+env/
+ENV/
+env.bak/
+venv.bak/
+
+# PyCharm / JetBrains
+.idea/
+*.iml
+
+# VS Code
+.vscode/
+
+# macOS
+.DS_Store
+
+# Test / coverage
+.coverage
+.coverage.*
+htmlcov/
+.pytest_cache/
+
+# Mypy / pip
+.mypy_cache/
+pip-wheel-metadata/
+
+# Logs and databases
+*.log
+*.sqlite3
+
+# Local settings
+local_settings.py
+
+# Wheels / build artifacts
+*.egg
+*.manifest
+*.spec
+*.so
+
+# Environment files
+.env.*
+
+# Ignore compiled C extensions
+*.so
