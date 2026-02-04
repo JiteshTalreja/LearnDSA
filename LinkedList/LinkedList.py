@@ -1,0 +1,103 @@
+class Node:
+    def __init__(self, value):
+        self.value = value
+        self.next = None
+
+
+class LinkedList:
+    def __init__(self, value):
+        new_node = Node(value)
+        self.head = new_node
+        self.tail = new_node
+        self.length = 1
+
+    def print(self):
+        temp = self.head
+        while temp is not None:
+            print(temp.value)
+            temp = temp.next
+
+    def append(self, value):
+        new_node = Node(value)
+
+        if self.head is None:
+            self.head = new_node
+            self.tail = new_node
+        else:
+            self.tail.next = new_node
+            self.tail = new_node
+        self.length += 1
+        return True
+
+    def pop(self):
+
+        # Case 1 empty list
+        if self.head is None:
+            return None  # empty list
+
+        # Case 2 only 1 item in list
+        if self.length == 1:
+            temp = self.head
+            self.head = None
+            self.tail = None
+            self.length -= 1
+            return temp.value
+
+        # Case 3 more than 1 item in list
+        temp = self.head
+        while temp.next.next:
+            temp = temp.next
+
+        poppedValue = temp.next.value
+        temp.next = None
+        self.tail = temp
+        self.length -= 1
+        return poppedValue
+
+    ## From videos
+
+    def pop2(self):
+        if self.length == 0:
+            return None
+        pre = self.head
+        temp = self.head
+        while temp.next:
+            pre = temp
+            temp = temp.next
+        self.tail = pre
+        self.tail.next = None
+        self.length -= 1
+        if self.length == 0:
+            self.head = None
+            self.tail = None
+        return temp
+
+    def prepend(self, value):
+        newNode = Node(value)
+        if self.length == 0:
+            self.head = newNode
+            self.tail = newNode
+        else:
+            self.head.next = self.head
+            self.head = newNode
+        self.length +=1
+        return True
+
+    def popfirst(self):
+        if self.length == 0:
+            return None
+        temp = self.head
+        self.head = self.head.next
+        temp.next = None
+        self.length -= 1
+        if self.length==0:
+            self.tail = None
+        return temp
+
+    def get(self, index):
+        if index <0 or index > self.length:
+            return None
+        temp = self.head
+        for _ in range(index):
+            temp = temp.next
+        return temp
