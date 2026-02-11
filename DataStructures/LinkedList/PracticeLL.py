@@ -1,3 +1,8 @@
+from logging import setLogRecordFactory
+from threading import current_thread
+
+from DataStructures.LinkedList.LinkedList import Node
+
 # Find middle of the linked list
 
 def find_middle_node(self):
@@ -110,3 +115,37 @@ def remove_duplicates_set_again(ll):
             values.add(current.value)
             previous = current
             current = current.next
+
+
+def binary_to_decimal(ll):
+    current = ll.head
+    dec = 0
+
+    while current:
+        dec = dec * 2 + current.value
+        current = current.next
+    return dec
+
+def partition(ll, x):
+    if ll.head is None:
+        return None
+
+    dummy1 = Node(0)
+    dummy2  = Node(0)
+
+    prev1 = dummy1
+    prev2 = dummy2
+
+    current = ll.head
+
+    while current:
+        if current.value < x:
+            prev1.next = current
+            prev1 = current
+        else:
+            prev2.next = current
+            prev2 = current
+        current = current.next
+        prev1.next = dummy2.next
+        ll.head = dummy1.next
+        prev2.next = None
