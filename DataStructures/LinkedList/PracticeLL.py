@@ -146,6 +146,43 @@ def partition(ll, x):
             prev2.next = current
             prev2 = current
         current = current.next
-        prev1.next = dummy2.next
-        ll.head = dummy1.next
-        prev2.next = None
+    prev1.next = dummy2.next
+    prev2.next = None
+    ll.head = dummy1.next
+
+
+def roate_right_with_k(self, ll, k: int):
+    head = ll.head
+    if not head or not head.next or k == 0:
+        return head
+
+    # Step 1: Find length
+    length = 1
+    tail = head
+
+    while tail.next:
+        tail = tail.next
+        length += 1
+
+    # Step 2: Reduce k
+    k = k % length
+    if k == 0:
+        return head
+
+    # Step 3: Make circular
+    tail.next = head
+
+    # Step 4: Find new tail
+    steps_to_new_tail = length - k
+    new_tail = head
+
+    for _ in range(steps_to_new_tail - 1):
+        new_tail = new_tail.next
+
+    # Step 5: Set new head
+    new_head = new_tail.next
+
+    # Break the circle
+    new_tail.next = None
+
+    return new_head
