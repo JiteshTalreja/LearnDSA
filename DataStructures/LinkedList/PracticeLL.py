@@ -230,3 +230,26 @@ def reverse_between_2(ll, x, y):
         prev.next = to_move
     ll.head = dummy.next
     return ll.head
+
+def reverse_pairs(ll):
+    dummy = Node(0)
+    dummy.next = ll.head
+    prev = dummy
+    first = ll.head   ## 0r we can give prev.next
+
+    while first and first.next:
+        second = first.next
+
+        ## SWAPPING
+
+        first.next = second.next
+        second.next = prev.next
+        prev.next = second
+
+
+        ## MOVE POINTERS
+
+        prev = first
+        first = first.next
+    ll.head = dummy.next
+    return ll.head
