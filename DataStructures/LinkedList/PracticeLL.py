@@ -151,7 +151,7 @@ def partition(ll, x):
     ll.head = dummy1.next
 
 
-def roate_right_with_k(self, ll, k: int):
+def rotate_right_with_k(ll, k: int):
     head = ll.head
     if not head or not head.next or k == 0:
         return head
@@ -186,3 +186,47 @@ def roate_right_with_k(self, ll, k: int):
     new_tail.next = None
 
     return new_head
+
+def reverse_between(self, start_index, end_index):
+    if self.length <= 1:
+        return
+
+    dummy_node = Node(0)
+    dummy_node.next = self.head
+    previous_node = dummy_node
+
+    for i in range(start_index):
+        previous_node = previous_node.next
+
+    current_node = previous_node.next
+
+    for i in range(end_index - start_index):
+        node_to_move = current_node.next
+        current_node.next = node_to_move.next
+        node_to_move.next = previous_node.next
+        previous_node.next = node_to_move
+
+    self.head = dummy_node.next
+
+def reverse_between_2(ll, x, y):
+    if ll.length <=1:
+        return
+
+
+    dummy = Node(0)
+    dummy.next = ll.head
+    prev = dummy
+
+    for _ in range(x):
+        prev = prev.next
+
+    current=  prev.next
+
+    for _ in range(y - x):
+        to_move = current.next
+
+        current.next = to_move.next
+        to_move.next = prev.next
+        prev.next = to_move
+    ll.head = dummy.next
+    return ll.head
