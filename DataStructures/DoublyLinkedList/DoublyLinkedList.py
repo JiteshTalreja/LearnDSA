@@ -133,3 +133,4 @@ class DoublyLinkedList:
         temp.next = None
         self.length-=1
         return temp
+
