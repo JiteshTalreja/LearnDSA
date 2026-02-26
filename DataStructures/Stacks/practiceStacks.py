@@ -45,3 +45,18 @@ def reverse_string(string):
         reversed_string += stack.pop()
 
     return reversed_string
+
+"""
+Stack: Parentheses Balanced ( ** Interview Question)
+"""
+
+def parantheses_balanced(string):
+    stack = Stack()
+
+    for i in string:
+        if i == "(":
+            stack.push(i)
+        elif i == ")":
+            if stack.is_empty() or stack.pop() !="(":
+                return False
+    return stack.is_empty()
