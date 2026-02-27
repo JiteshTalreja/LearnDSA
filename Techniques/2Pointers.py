@@ -76,3 +76,26 @@ def reverse_sentence(sen):
             l = r
         i += 1
     return ''.join(list_sen[:r])
+
+"""
+
+## Q4 Number of subarrays to satisfy a sum condition:
+
+"""
+
+def sub_sequences(arr, target):
+
+    sorted_arr = sorted(arr)
+    n = len(arr)
+
+    result = 0
+    i = 0
+    r = n-1
+
+    while i <=r:
+        if sorted_arr[i] + sorted_arr[r] <=target:
+            result += 2**(r-i)
+            i +=1
+        else:
+            r -=1
+    return result
