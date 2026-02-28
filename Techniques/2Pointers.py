@@ -99,3 +99,28 @@ def sub_sequences(arr, target):
         else:
             r -=1
     return result
+
+
+
+"""
+## Q4 Minimize Maximum Pair sum in array
+"""
+
+
+def max_min_sum(arr):
+
+    sorted_arr = sorted(arr)
+    n = len(sorted_arr)
+
+    i = 0
+    r = n-1
+    result  = 0
+
+    while i <= r:
+        result  = max(sorted_arr[i]+sorted_arr[r], result)
+        i +=1
+        r -=1
+    return result
+
+
+print(max_min_sum([3,5,2,3]))
