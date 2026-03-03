@@ -1,6 +1,5 @@
 from DoublyLinkedList import Node
 ## Palindrome checker
-from ctypes.util import dllist
 
 
 ## MY SOLUTION
