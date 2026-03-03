@@ -15,7 +15,7 @@ def find_middle_node(self):
     return slow
 
 
-# find is the llinked list has loop
+# find is the linked list has loop
 
 def has_loop(self):
     slow = self.head
