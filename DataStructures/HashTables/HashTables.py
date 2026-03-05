@@ -17,5 +17,31 @@ class HashTable:
         for i, v in enumerate(self.data_map):
             print(f'index = {i} : value = {v}')
 
-    def set_item(self, value):
-        pass
+    def set_item(self, key, value):
+        index = self.__hash(key)
+
+        if not self.data_map[index]:
+            self.data_map[index] = []
+        self.data_map[index].append([key, value])
+
+
+    def get_item(self, key):
+
+        index = self.__hash(key)
+
+        if self.data_map[index]:
+            for i in range(len(self.data_map[index])):
+                if self.data_map[index][i][0] == key:
+                    return self.data_map[index][i][1]
+        return None
+
+
+
+tab = HashTable()
+
+tab.set_item('bolts', 9000)
+tab.set_item('washers', 700)
+tab.set_item('hammer', '100')
+print('get', tab.get_item('washers'))
+
+tab.print_table()

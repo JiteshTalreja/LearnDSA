@@ -124,3 +124,78 @@ def max_min_sum(arr):
 
 
 print(max_min_sum([3,5,2,3]))
+
+
+
+"""
+## Q5 LEETCODE 2963| 2963. Count the Number of Good Partitions
+Solved
+Hard
+Topics
+premium lock icon
+Companies
+Hint
+You are given a 0-indexed array nums consisting of positive integers.
+
+A partition of an array into one or more contiguous subarrays is called good if no two subarrays contain the same number.
+
+Return the total number of good partitions of nums.
+
+Since the answer may be large, return it modulo 109 + 7.
+
+
+
+Example 1:
+
+Input: nums = [1,2,3,4]
+Output: 8
+Explanation: The 8 possible good partitions are: ([1], [2], [3], [4]), ([1], [2], [3,4]), ([1], [2,3], [4]), ([1], [2,3,4]), ([1,2], [3], [4]), ([1,2], [3,4]), ([1,2,3], [4]), and ([1,2,3,4]).
+
+"""
+
+
+## 1st APPROACH
+
+def good_partition(arr):
+    ## store the latest index of all elements from arrray
+    M = 10**9 + 7
+    dict1 = {}
+
+    for i, v in enumerate(arr):
+        dict1[v] = i
+
+    result =1
+    j = 0
+
+    for i, v in enumerate(arr):
+
+        j = max(j, dict1[v])
+
+        if i == j and i != len(arr) -1:
+            result = (result * 2) % M
+    return result
+
+## 2nd APPROACH
+
+# Another approach
+
+def good_partition2(arr):
+    ## store the latest index of all elements from arrray
+    M = 10**9 + 7
+    dict1 = {}
+
+    for i, v in enumerate(arr):
+        dict1[v] = i
+
+    i = 0
+    j = dict1[arr[0]]
+    result = 1
+
+    while i < len(arr):
+
+        if i > j:
+            result = (result *2) % M
+
+        j = max(j, dict1[arr[i]])
+        i +=1
+    return result
