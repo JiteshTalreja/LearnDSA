@@ -80,3 +80,33 @@ def sort_stack(stack):
 
     while not new_stack.is_empty():
         stack.push(new_stack.pop())
+
+
+""" ## Parantheses variation
+Minimum Remove to Make Valid Parentheses
+lee(t(c)o)de)
+
+"""
+
+def min_removal(string):
+    chars = list(string)
+    stack = []
+
+    for i, v in enumerate(chars):
+        if v =="(":
+            stack.append(i)
+
+        elif v == ")":
+            if stack:
+                stack.pop()
+            else:
+                chars[i] = ''
+
+    while stack:
+        chars[stack.pop()] = ''
+
+    return ''.join(chars)
+
+
+
+print(min_removal('))((()'))
