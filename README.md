@@ -1,8 +1,11 @@
 # 📚 Data Structures & Algorithms in Python
 
-This repository contains my structured practice of **Data Structures & Algorithms (DSA)** using Python.
+![Python](https://img.shields.io/badge/Python-3.x-blue)
+![DSA](https://img.shields.io/badge/Focus-Data%20Structures%20%26%20Algorithms-green)
 
-The goal is to strengthen problem-solving skills and prepare for technical interviews by covering:
+This repository contains my structured practice of **Data Structures & Algorithms (DSA)** using **Python**.
+
+The goal is to strengthen **problem-solving skills**, improve **algorithmic thinking**, and prepare for **technical interviews** by systematically covering:
 
 - Core data structures  
 - Common algorithmic patterns  
@@ -11,13 +14,16 @@ The goal is to strengthen problem-solving skills and prepare for technical inter
 
 ---
 
-## 🚀 Topics Covered
+# 🚀 Topics Covered
 
+## Core Data Structures
 - Arrays & Strings  
 - Linked Lists  
 - Stacks & Queues  
 - Trees & Binary Search Trees  
 - Graphs  
+
+## Algorithmic Techniques
 - Recursion & Backtracking  
 - Sorting & Searching  
 - Dynamic Programming  
@@ -25,45 +31,115 @@ The goal is to strengthen problem-solving skills and prepare for technical inter
 
 ---
 
-## 🛠 Language Used
+# 🛠 Language Used
 
-- Python 🐍
+- **Python 🐍**
 
----
+All implementations focus on:
 
-## 📈 Progress Approach
-
-✔ Daily/regular practice  
-✔ Clean, readable solutions  
-✔ Focus on time & space complexity  
+- Clean, readable code  
+- Interview-friendly solutions  
+- Clear logic and structure  
 
 ---
 
-## 🎯 Goal
+# 📈 Practice Approach
 
-To master DSA concepts and become confident in solving real-world and interview problems efficiently.
-and to master pattern recognition for below Algorithms.
-Binary search
-Two pointers
-Sliding window
-Prefix sum
-Hash map
-DFS
-BFS
-Topological sort
-Union find
-Dijkstra
-Heap
-Trie
-Backtracking
-Kadane
-Merge intervals
-DP knapsack
-DP LIS
-DP LCS
-Greedy scheduling
-Bit manipulation
+✔ Consistent daily / regular practice  
+✔ Clean and readable solutions  
+✔ Focus on **time complexity** and **space complexity**  
+✔ Understanding **patterns instead of memorizing solutions**
 
 ---
+
+# 🎯 Goal
+
+To **master DSA concepts** and become confident in solving **real-world and interview-level problems efficiently**.
+
+This repository focuses on developing **strong pattern recognition** for the core algorithms that power most technical interviews.
+
+---
+
+# 🧠 Algorithm Roadmap
+
+Use the checkboxes to track progress.
+
+## Search & Array Patterns
+
+- [ ] Binary Search  
+- [ ] Two Pointers  
+- [ ] Sliding Window  
+- [ ] Prefix Sum  
+- [ ] Hash Maps  
+
+---
+
+## Graph Algorithms
+
+- [ ] DFS (Depth First Search)  
+- [ ] BFS (Breadth First Search)  
+- [ ] Topological Sort  
+- [ ] Union Find  
+- [ ] Dijkstra's Algorithm  
+
+---
+
+## Data Structure Techniques
+
+- [ ] Heap / Priority Queue  
+- [ ] Trie  
+
+---
+
+## Problem Solving Techniques
+
+- [ ] Backtracking  
+- [ ] Kadane’s Algorithm  
+- [ ] Merge Intervals  
+
+---
+
+## Dynamic Programming
+
+- [ ] DP Knapsack  
+- [ ] DP LIS (Longest Increasing Subsequence)  
+- [ ] DP LCS (Longest Common Subsequence)  
+
+---
+
+## Greedy & Bit Techniques
+
+- [ ] Greedy Scheduling  
+- [ ] Bit Manipulation  
+
+---
+
+# 📊 Problem Progress Tracker
+
+| Topic | Problems Solved |
+|------|----------------|
+| Arrays | |
+| Hashmaps | |
+| Linked Lists | |
+| Trees | |
+| Graphs | |
+| Dynamic Programming | |
+| Backtracking | |
+
+**Total Problems Solved:**  
+
+---
+
+# 📂 Repository Purpose
+
+This repository serves as:
+
+- A **personal learning journal**
+- A **structured DSA practice log**
+- A **reference for interview preparation**
+
+---
+
+# 🤝 Contributions
 
 Feel free to explore, learn, and improve along with me!
