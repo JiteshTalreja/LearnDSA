@@ -42,6 +42,27 @@ The goal is to strengthen problem-solving skills and prepare for technical inter
 ## 🎯 Goal
 
 To master DSA concepts and become confident in solving real-world and interview problems efficiently.
+and to master pattern recognition for below Algorithms.
+Binary search
+Two pointers
+Sliding window
+Prefix sum
+Hash map
+DFS
+BFS
+Topological sort
+Union find
+Dijkstra
+Heap
+Trie
+Backtracking
+Kadane
+Merge intervals
+DP knapsack
+DP LIS
+DP LCS
+Greedy scheduling
+Bit manipulation
 
 ---
 
