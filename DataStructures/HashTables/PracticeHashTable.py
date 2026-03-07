@@ -98,3 +98,96 @@ def group_anagrams(arr):
 
         dict1.key.append(i)
     return dict1
+
+
+""" Q5
+HT: Two Sum ( ** Interview Question)
+two_sum()
+
+Problem:
+Given an array of integers nums and a target integer target, find the indices of two numbers in the array that add up to the target.
+
+The main challenge here is to implement this function in one pass through the array. This means you should not iterate over the array more than once. 
+Therefore, your solution should have a time complexity of O(n), where n is the number of elements in nums.
+
+Input:
+A list of integers nums .
+A target integer target.
+
+Output:
+A list of two integers representing the indices of the two numbers in the input array nums that add up to the target. If no two numbers in the input array add up to the target, return an empty list [].
+Example:
+
+Input: nums = [5, 1, 7, 2, 9, 3], target = 10
+Output: [1, 4]
+Explanation: The numbers at indices 1 and 4 in the array add up to the target 10.
+ 
+Input: nums = [3, 2, 4], target = 6
+Output: [1, 2]
+Explanation: The numbers at indices 1 and 2 in the array add up to the target 6.
+ 
+Input: nums = [3, 3], target = 6
+Output: [0, 1]
+Explanation: The numbers at indices 0 and 1 in the array add up to the target 6.
+ 
+Input: nums = [2, 1, 2, 7, 11, 15], target = 9
+Output: [2, 3]
+Explanation: Notice there are two 2s in the array.  The second one will be used.
+ 
+Input: nums = [1, 2, 3, 4, 5], target = 10
+Output: []
+Explanation: There are no two numbers in the array add up to the target 10.
+ 
+Input: nums = [], target = 0
+Output: []
+Explanation: There are no numbers in the input array, so the function returns an empty list [].
+"""
+
+def two_sum(nums, target):
+    dict1= {}
+
+    for i, v in enumerate(nums):
+
+        compliment = target - v
+        if compliment in dict1:
+            return [dict1[compliment], i]
+        dict1[v] = i
+
+    return []
+
+""" Q6
+HT: Subarray Sum ( ** Interview Question)
+Given an array of integers nums and a target integer target, write a Python function called subarray_sum that finds the indices of a contiguous subarray in nums that add up to the target sum using a hash table (dictionary).
+
+Your function should take two arguments:
+
+nums: a list of integers representing the input array
+
+target: an integer representing the target sum
+
+
+Your function should return a list of two integers representing the starting and ending indices of the subarray that adds up to the target sum. If there is no such subarray, your function should return an empty list.
+
+For example:
+nums = [1, 2, 3, 4, 5]
+target = 9
+print(subarray_sum(nums, target))  # should print [1, 3]
+
+
+Note that there may be multiple subarrays that add up to the target sum, but your function only needs to return the indices of any one such subarray. Also, the input list may contain both positive and negative integers.
+"""
+
+
+def subarray_sum(nums, target):
+    dict1 = {0: -1}
+    current_sum = 0
+
+    for i, v in enumerate(nums):
+        current_sum += v
+
+        if current_sum - target in dict1:
+            return [dict1[current_sum - target] + 1, i]
+
+        dict1[current_sum] = i
+
+    return []
