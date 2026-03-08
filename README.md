@@ -64,13 +64,22 @@ This repository focuses on developing **strong pattern recognition** for the cor
 
 Use the checkboxes to track progress.
 
+---
+
 ## Search & Array Patterns
 
 - [ ] Binary Search  
+- [ ] Binary Search on Answer  
 - [ ] Two Pointers  
 - [ ] Sliding Window  
 - [ ] Prefix Sum  
 - [ ] Hash Maps  
+
+---
+
+## Linked List Techniques
+
+- [ ] Fast & Slow Pointer (Floyd's Cycle Detection)
 
 ---
 
@@ -84,6 +93,13 @@ Use the checkboxes to track progress.
 
 ---
 
+## Tree Algorithms
+
+- [ ] Tree DFS  
+- [ ] Tree BFS  
+
+---
+
 ## Data Structure Techniques
 
 - [ ] Heap / Priority Queue  
@@ -91,16 +107,25 @@ Use the checkboxes to track progress.
 
 ---
 
+## Stack / Queue Patterns
+
+- [ ] Monotonic Stack  
+- [ ] Monotonic Queue  
+
+---
+
 ## Problem Solving Techniques
 
 - [ ] Backtracking  
 - [ ] Kadane’s Algorithm  
-- [ ] Merge Intervals  
+- [ ] Interval Problems (Merge / Insert / Overlap)
 
 ---
 
 ## Dynamic Programming
 
+- [ ] 1D Dynamic Programming  
+- [ ] 2D Dynamic Programming  
 - [ ] DP Knapsack  
 - [ ] DP LIS (Longest Increasing Subsequence)  
 - [ ] DP LCS (Longest Common Subsequence)  
@@ -111,7 +136,6 @@ Use the checkboxes to track progress.
 
 - [ ] Greedy Scheduling  
 - [ ] Bit Manipulation  
-
 ---
 
 # 📊 Problem Progress Tracker
