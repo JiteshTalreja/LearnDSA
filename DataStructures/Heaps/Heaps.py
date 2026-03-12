@@ -6,7 +6,7 @@ class MaxHeap:
     def _left_child(self, index):
         return (2 * index )+1
 
-    def _righ_child(self, index):
+    def _right_child(self, index):
         return (2 * index) + 2
 
     def _parent(self, index):
@@ -23,3 +23,55 @@ class MaxHeap:
         while current > 0 and self.heap[current] > self.heap[self._parent(current)]:
             self._swap(current, self._parent(current))
             current = self._parent(current)
+
+    def _sink_down(self, index):
+        max_index = index
+
+        while True:
+            left_index = self._left_child(index)
+            right_index = self._right_child(index)
+
+            if (left_index<len(self.heap)) and self.heap[max_index] < self.heap[left_index]:
+                max_index = left_index
+
+            if (right_index<len(self.heap)) and self.heap[max_index] < self.heap[right_index]:
+                max_index = right_index
+
+            if max_index != index:
+                self._swap(max_index, index)
+                index = max_index
+            else:
+                return
+
+
+    def remove(self):
+
+        if not self.heap:
+            return None
+
+        if len(self.heap) ==1:
+            return self.heap.pop()
+
+        top_value = self.heap[0]
+
+        self.heap[0] = self.heap.pop()
+        self._sink_down(0)
+        return top_value
+
+
+
+heap = MaxHeap()
+heap.insert(95)
+heap.insert(75)
+heap.insert(80)
+heap.insert(55)
+heap.insert(60)
+heap.insert(50)
+heap.insert(65)
+
+print(heap.heap)
+
+heap.remove()
+print(heap.heap)
+heap.remove()
+print(heap.heap)
