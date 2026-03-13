@@ -1,22 +1,26 @@
+"""
+this implementation is for MAxHeap, for MinHeap some of the logics will be reversed
+eg for insert
+"""
+
 
 class MaxHeap:
     def __init__(self):
         self.heap = []
 
     def _left_child(self, index):
-        return (2 * index )+1
+        return 2 * index + 1
 
     def _right_child(self, index):
-        return (2 * index) + 2
+        return 2 * index + 2
 
     def _parent(self, index):
-        return (index-1)//2
+        return (index - 1) // 2
 
     def _swap(self, index1, index2):
         self.heap[index1], self.heap[index2] = self.heap[index2], self.heap[index1]
 
     def insert(self, value):
-
         self.heap.append(value)
         current = len(self.heap) - 1
 
@@ -26,52 +30,58 @@ class MaxHeap:
 
     def _sink_down(self, index):
         max_index = index
-
         while True:
             left_index = self._left_child(index)
             right_index = self._right_child(index)
 
-            if (left_index<len(self.heap)) and self.heap[max_index] < self.heap[left_index]:
+            if (left_index < len(self.heap) and
+                    self.heap[left_index] > self.heap[max_index]):
                 max_index = left_index
 
-            if (right_index<len(self.heap)) and self.heap[max_index] < self.heap[right_index]:
+            if (right_index < len(self.heap) and
+                    self.heap[right_index] > self.heap[max_index]):
                 max_index = right_index
 
             if max_index != index:
-                self._swap(max_index, index)
+                self._swap(index, max_index)
                 index = max_index
             else:
                 return
 
-
     def remove(self):
-
-        if not self.heap:
+        if len(self.heap) == 0:
             return None
 
-        if len(self.heap) ==1:
+        if len(self.heap) == 1:
             return self.heap.pop()
 
-        top_value = self.heap[0]
-
+        max_value = self.heap[0]
         self.heap[0] = self.heap.pop()
         self._sink_down(0)
-        return top_value
+
+        return max_value
 
 
+def find_kth(nums, k):
+    heap = MaxHeap()
 
-heap = MaxHeap()
-heap.insert(95)
-heap.insert(75)
-heap.insert(80)
-heap.insert(55)
-heap.insert(60)
-heap.insert(50)
-heap.insert(65)
+    for i in nums:
+        heap.insert(i)
+        if len(heap.heap) > k :
+            heap.remove()
+    return heap.remove()
 
-print(heap.heap)
 
-heap.remove()
-print(heap.heap)
-heap.remove()
-print(heap.heap)
+def stream_max(nums):
+    max_heap = MaxHeap()
+    max_stream = []
+    for i in nums:
+        max_heap.insert(i)
+        print(max_heap.heap)
+        max_stream.append(max_heap.heap[0])
+
+    return max_stream
+
+
+#[6, 5, 4, 5, 2, 3, 3, 1, 2]
+print(stream_max([1,3,2,5,4]))
