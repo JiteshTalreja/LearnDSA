@@ -29,4 +29,26 @@ def print_n_to_1(n):
         return
     print(n)
     print_n_to_1(n-1)
-print_n_to_1(10)
+
+"""
+Q4 sum of first N number 
+"""
+
+## parameterized way (simply said, calling same function with different parameters)
+
+def sum_n(n, sum):
+    if n < 1:
+        print(sum)
+        return 0
+    sum_n(n-1, sum+n)
+
+sum_n(10, 0)
+
+## Functional
+
+def sum_n_func(n):
+    if n <=0:
+        return 0
+    return n + sum_n_func(n-1)
+
+sum_n_func(10)
