@@ -52,3 +52,48 @@ def sum_n_func(n):
     return n + sum_n_func(n-1)
 
 sum_n_func(10)
+
+
+"""
+Q5 Reverse a list using recursion
+"""
+def reverse_list(nums, i, n):
+    if i>=n:
+        return
+    nums[i], nums[n] = nums[n], nums[i]
+    reverse_list(nums, i+1, n-1)
+    return nums
+
+"""
+Q6 check palindrome
+"""
+
+
+def is_palindrome(string, i):
+    n = len(string)
+
+    if i >= n // 2:
+        return True
+
+    if string[i] != string[n - i - 1]:
+        return False
+    return is_palindrome(string, i + 1)
+
+
+"""
+Q7 Fibonacci series 
+    (recursion tree )
+    
+        n
+      /   \
+    n-1   n-2
+   /   \
+ n-2   n-3
+"""
+
+def nth_fibonacci(n):
+
+    if n<=1:
+        return n
+
+    return nth_fibonacci(n-1) + nth_fibonacci(n-2)
