@@ -43,7 +43,7 @@ class BinarySearchTree:
 
             if value < temp.value:
                 temp = temp.value
-            elif temp.value > temp.value:
+            elif value > temp.value:
                 temp = temp.right
             else:
                 return True
