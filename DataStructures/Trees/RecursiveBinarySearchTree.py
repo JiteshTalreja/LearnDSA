@@ -1,3 +1,6 @@
+from http.cookiejar import cut_port_re
+
+
 class Node:
 
     def __init__(self, value):
@@ -73,3 +76,80 @@ class BinarySearchTree:
 
     def delete_node(self, value):
         self.root = self.__delete_node(self.root, value)
+
+    ## BREADTH FIRST SEARCH ( BFS )
+
+    def bfs(self):
+
+        current_node = self.root
+        queue = []
+        result = []
+
+        queue.append(current_node)
+
+        while len(queue) >0:
+            current_node = queue.pop(0)
+            result.append(current_node.value)
+            if current_node.left:
+                queue.append(current_node.left)
+            if current_node.right:
+                queue.append(current_node.right)
+        return result
+
+
+    ## DEPTH FIRST SEARCH ( DFS ) - PRE ORDER
+    def dfs_pre_order(self):
+        results = []
+
+        def traverse(current_node):
+            results.append(current_node.value)
+            if current_node.left:
+                traverse(current_node.left)
+            if current_node.right:
+                traverse(current_node.right)
+
+        traverse(self.root)
+        return results
+
+    ## DEPTH FIRST SEARCH ( DFS ) - POST ORDER
+    def dfs_post_order(self):
+        results = []
+
+        def traverse(current_node):
+            if current_node.left:
+                traverse(current_node.left)
+            if current_node.right:
+                traverse(current_node.right)
+            results.append(current_node.value)
+
+        traverse(self.root)
+        return results
+
+        ## DEPTH FIRST SEARCH ( DFS ) - In ORDER
+    def dfs_in_order(self):
+        results = []
+
+        def traverse(current_node):
+            if current_node.left:
+                traverse(current_node.left)
+            results.append(current_node.value)
+            if current_node.right:
+                traverse(current_node.right)
+
+        traverse(self.root)
+        return results
+
+
+
+tree = BinarySearchTree()
+tree.r_insert(47)
+tree.r_insert(21)
+tree.r_insert(76)
+tree.r_insert(18)
+tree.r_insert(27)
+tree.r_insert(52)
+tree.r_insert(82)
+
+print(tree.dfs_pre_order())
+print(tree.dfs_post_order())
+print(tree.dfs_in_order())
