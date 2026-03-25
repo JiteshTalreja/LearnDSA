@@ -311,3 +311,29 @@ def insertion_sort(self):
     while temp.next is not None:
         temp = temp.next
     self.tail = temp
+
+
+
+"""MERGE SORT IN LINKED LIST"""
+def merge(self, other_list):
+    other_head = other_list.head
+    dummy = Node(0)
+    current = dummy
+
+    while self.head is not None and other_head is not None:
+        if self.head.value < other_head.value:
+            current.next = self.head
+            self.head = self.head.next
+        else:
+            current.next = other_head
+            other_head = other_head.next
+        current = current.next
+
+    if self.head is not None:
+        current.next = self.head
+    else:
+        current.next = other_head
+        self.tail = other_list.tail
+
+    self.head = dummy.next
+    self.length += other_list.length

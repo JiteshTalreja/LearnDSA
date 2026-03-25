@@ -26,4 +26,15 @@ def merge(l1, l2):
     return l3
 
 
-print(merge([1,3,7,8], [2,4,5,6, 9]))
+def merge_sort(my_list):
+
+    if len(my_list)==1:
+        return my_list
+
+    mid = int(len(my_list)/2)
+    left = merge_sort(my_list[:mid])
+    right = merge_sort(my_list[mid:])
+
+    return merge(left, right)
+
+print(merge_sort([1,3,7,8,2,4,5,6,9]))
