@@ -10,4 +10,4 @@ def bubble_sort(nums):
 
 
 
-print(bubble_sort([4,2,6,5,1,3]))
+print(bubble_sort([4,2,6,-5,1,3]))
