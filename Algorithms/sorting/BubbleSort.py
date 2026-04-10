@@ -1,3 +1,5 @@
+"""for bubble sort we take the maximum and push it At the end of the array"""
+
 def bubble_sort(nums):
 
     for i in range(len(nums)-1, 0, -1):
