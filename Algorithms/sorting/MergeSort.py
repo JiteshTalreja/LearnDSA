@@ -37,4 +37,4 @@ def merge_sort(my_list):
 
     return merge(left, right)
 
-print(merge_sort([1,3,7,8,2,4,5,6,9]))
+print(merge_sort([1,3,7,8,2,4,1, 2, 5,6,9]))
