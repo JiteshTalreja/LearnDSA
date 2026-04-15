@@ -39,7 +39,7 @@ def slargest(nums):
             slargest = i
     return slargest
 
-print(slargest([3,20,10,15,2]))
+# print(slargest([3,20,10,15,2]))
 
 ## OPTIMAL SOLUTION
 
@@ -58,7 +58,7 @@ def sslargest_opt(nums):
 
     return slargest
 
-print('slarge opt', sslargest_opt([3,20,10,15,2]))
+# print('slarge opt', sslargest_opt([3,20,10,15,2]))
 
 #-----------------------------------------------------------------------------------------------------------------------------------------------------------
 #-----------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -85,4 +85,52 @@ def remove_dups(nums):
         j+=1
     return nums[:i+1]
 
-print(remove_dups([1,1,1,2,2,2,3,3,3,4,4,4]))
+# print(remove_dups([1,1,1,2,2,2,3,3,3,4,4,4]))
+
+#-----------------------------------------------------------------------------------------------------------------------------------------------------------
+#-----------------------------------------------LEFT ROTATE-------------------------------------------------------------------------------------------------
+## Q5 Rotate an array by k places
+## Right rotate by k = Left rotate by (n - k)
+
+def left_rotate(nums, k):
+    return nums[k:] + nums[:k]
+
+# print(left_rotate([1,2,3,4,5,6,7], 3))
+
+# another method
+
+def left_rotate2(nums, k):
+    k%=len(nums)
+    n = len(nums)
+    l2 = []
+    for i in range(k):
+        l2.append(nums[i])
+        print(l2)
+
+    for i in range(k, n):
+        nums[i-k] = nums[i]
+        print(nums)
+
+    for i in range(n-k, n):
+        nums[i] = l2[i-(n-k)]
+    return nums
+print("left_rotate2", left_rotate2([1,2,3,4,5,6,7], 3))
+
+
+#------------------------------------------------RIGHT ROTATE------------------------------------------------------------------------------------------------
+
+
+def reverse(nums, l, r):
+    while l < r:
+        nums[l], nums[r] = nums[r], nums[l]
+        r-=1
+        l+=1
+
+def right_rotate(nums, k):
+    k %= len(nums)
+
+    reverse(nums, 0, len(nums)-1)
+    reverse(nums, 0, k-1)
+    reverse(nums, k, len(nums)-1)
+    return nums
+# print(right_rotate([1,2,3,4,5,6,7], 3))
