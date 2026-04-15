@@ -116,6 +116,11 @@ def left_rotate2(nums, k):
     return nums
 print("left_rotate2", left_rotate2([1,2,3,4,5,6,7], 3))
 
+## best and Optimal solution for this is using reverse:
+## Reverse first k
+## reverse last n-k
+## reverse full list
+
 
 #------------------------------------------------RIGHT ROTATE------------------------------------------------------------------------------------------------
 
