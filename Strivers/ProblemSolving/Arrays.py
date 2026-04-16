@@ -105,11 +105,9 @@ def left_rotate2(nums, k):
     l2 = []
     for i in range(k):
         l2.append(nums[i])
-        print(l2)
 
     for i in range(k, n):
         nums[i-k] = nums[i]
-        print(nums)
 
     for i in range(n-k, n):
         nums[i] = l2[i-(n-k)]
@@ -138,4 +136,32 @@ def right_rotate(nums, k):
     reverse(nums, 0, k-1)
     reverse(nums, k, len(nums)-1)
     return nums
-# print(right_rotate([1,2,3,4,5,6,7], 3))
+print(right_rotate([1,2,3,4,5,6,7], 3))
+
+#-----------------------------------------------------------------------------------------------------------------------------------------------------------
+#-----------------------------------------------------------------------------------------------------------------------------------------------------------
+## Q6 Move all zeros at the end of an array
+
+list1  = [1,0,2,3,2,0,0,4,5,1]
+
+## [1,2,0,3,2,0,0,4,5,1]
+
+def push_back(nums, item=0):
+    i = 0
+    j = 1
+
+    while j<=len(nums)-1:
+        print(j)
+        if nums[i]==item and nums[j]!=item:
+            nums[i], nums[j] = nums[j], nums[i]
+            i+=1
+            j+=1
+        elif nums[i] != item:
+            i+=1
+            j+=1
+        else:
+            j+=1
+
+    return nums
+
+print(push_back(list1))
