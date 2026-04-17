@@ -165,3 +165,85 @@ def push_back(nums, item=0):
     return nums
 
 print(push_back(list1))
+
+#-----------------------------------------------------------------------------------------------------------------------------------------------------------
+#-----------------------------------------------------------------------------------------------------------------------------------------------------------
+## Q7 Union  of 2 arrays:
+
+## Brute
+def union(l1, l2):
+    set1 = set()
+
+    for i in l1:
+        set1.add(i)
+    for j in l2:
+        set1.add(j)
+    return set1
+
+print(union([1,1,2,3,4,5,], [2,3,4,4,5,6]))
+
+## OPTIMAL
+def union_sorted(l1, l2):
+    i = j = 0
+    res = []
+
+    while i < len(l1) and j < len(l2):
+        if l1[i] <= l2[j]:
+            if not res or res[-1] != l1[i]:
+                res.append(l1[i])
+            i += 1
+        else:
+            if not res or res[-1] != l2[j]:
+                res.append(l2[j])
+            j += 1
+
+    while i < len(l1):
+        if not res or res[-1] != l1[i]:
+            res.append(l1[i])
+        i += 1
+
+    while j < len(l2):
+        if not res or res[-1] != l2[j]:
+            res.append(l2[j])
+        j += 1
+
+    return res
+
+#-----------------------------------------------------------------------------------------------------------------------------------------------------------
+#-----------------------------------------------------------------------------------------------------------------------------------------------------------
+## Q7 Intersection of 2 arrays:
+
+##BRUTE
+def intersection_with_duplicates(l1, l2):
+    res = []
+    used = [False] * len(l2)
+
+    for i in range(len(l1)):
+        for j in range(len(l2)):
+            if l1[i] == l2[j] and not used[j]:
+                res.append(l1[i])
+                used[j] = True
+                break
+
+    return res
+
+## OPTIMAL
+
+def intersection_sorted(l1, l2):
+    l1.sort()
+    l2.sort()
+
+    i = j = 0
+    res = []
+
+    while i < len(l1) and j < len(l2):
+        if l1[i] < l2[j]:
+            i += 1
+        elif l1[i] > l2[j]:
+            j += 1
+        else:
+            res.append(l1[i])
+            i += 1
+            j += 1
+
+    return res
