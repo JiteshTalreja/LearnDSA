@@ -247,3 +247,107 @@ def intersection_sorted(l1, l2):
             j += 1
 
     return res
+
+
+#-----------------------------------------------------------------------------------------------------------------------------------------------------------
+#-----------------------------------------------------------------------------------------------------------------------------------------------------------
+## Q8 Find missing number in array
+
+##Brute
+def missing_brute(nums, n):
+
+    for i in range(1, n):
+        flag = False
+        for j in range(0, n-1):
+            if nums[j] == i:
+                flag = True
+                break
+        if not flag:
+            return i
+
+print(missing_brute([1,2,4,5], 5))
+
+
+## Better
+def missing_better(nums, n):
+    hash = [0]*(n+1)
+
+    for i in nums:
+        hash[i] = 1
+
+    for i in range(1, n):
+        if hash[i] == 0:
+            return i
+
+print(missing_better([1,2,4,5], 5))
+
+
+## Optimal
+def missing_optimal(nums, n):
+    sum_n = int((n*(n+1))/2)
+    cur_sum = 0
+    for i in nums:
+        cur_sum+=i
+
+    return sum_n - cur_sum
+print(missing_optimal([1,2,4,5], 5))
+
+## Optimal 2
+def missing_optimal2(nums, n):
+    xor1 = 0
+    xor2 = 0
+    for i in range(0, n-1):
+        xor1 ^= i+1
+        xor2 ^= nums[i]
+    xor1^=n
+    return xor1^xor2
+
+print(missing_optimal2([1,2,4,5,], 5))
+
+#-----------------------------------------------------------------------------------------------------------------------------------------------------------
+#-----------------------------------------------------------------------------------------------------------------------------------------------------------
+## Q9 Find maximum consecutive 1s
+
+def max_con_1(nums):
+    maxi = 0
+    counter = 0
+    for i in nums:
+        if i ==1:
+            counter+=1
+            maxi = max(maxi, counter)
+        else:
+            counter = 0
+    return maxi
+print(max_con_1([1,1,2,2,2,1,1,1,1,1,1,2,2,2,2,2,2,2,2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]))
+
+#-----------------------------------------------------------------------------------------------------------------------------------------------------------
+#-----------------------------------------------------------------------------------------------------------------------------------------------------------
+## Q9 Find the number that just appears once in an array
+
+##Brute
+def single_number_brute(nums):
+    for i in range(len(nums)):
+        count = 0
+        for j in range(len(nums)):
+            if nums[i] == nums[j]:
+                count += 1
+        if count == 1:
+            return nums[i]
+
+## Better
+def single_number_better(nums):
+    freq = {}
+
+    for num in nums:
+        freq[num] = freq.get(num, 0) + 1
+
+    for num in nums:
+        if freq[num] == 1:
+            return num
+
+## Optimal
+def single_number_optimal(nums):
+    xor = 0
+    for num in nums:
+        xor ^= num
+    return xor
