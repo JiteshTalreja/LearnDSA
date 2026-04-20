@@ -318,7 +318,7 @@ def max_con_1(nums):
         else:
             counter = 0
     return maxi
-print(max_con_1([1,1,2,2,2,1,1,1,1,1,1,2,2,2,2,2,2,2,2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]))
+# print(max_con_1([1,1,2,2,2,1,1,1,1,1,1,2,2,2,2,2,2,2,2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]))
 
 #-----------------------------------------------------------------------------------------------------------------------------------------------------------
 #-----------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -351,3 +351,54 @@ def single_number_optimal(nums):
     for num in nums:
         xor ^= num
     return xor
+
+#-----------------------------------------------------------------------------------------------------------------------------------------------------------
+#-----------------------------------------------------------------------------------------------------------------------------------------------------------
+## Q10 Find Longest Subarray with Sum - k
+
+##Brute
+
+def long_brute(nums, k):
+    n = len(nums)
+    longest = 0
+
+    for i in range(n):
+        total = 0
+        for j in range(i, n):
+            total += nums[j]
+            if total == k:
+                longest = max(longest, j - i + 1)
+    return longest
+
+print('long: ', long_brute([1,2,3,1,1,1,1,4,5,2], 3))
+
+## Optimal (USING PrefixSum)
+"""
+In python since we are using dict this is O(n), for C++ Striver was using ordered map which has search complexity of Logn
+"""
+
+
+def longest_subarray_sum_k(nums, k):
+    prefix_sum = 0
+    max_len = 0
+    mp = {}  # prefix_sum -> first index
+
+    for i in range(len(nums)):
+        prefix_sum += nums[i]
+
+        # Case 1: subarray from 0 to i
+        if prefix_sum == k:
+            max_len = i + 1
+
+        # Case 2: subarray in between
+        if (prefix_sum - k) in mp:
+            length = i - mp[prefix_sum - k]
+            max_len = max(max_len, length)
+
+        # Store only FIRST occurrence
+        if prefix_sum not in mp:
+            mp[prefix_sum] = i
+
+    return max_len
+print("long optimal:", longest_subarray_sum_k([1, 0, 2, 0, 1], 3))
+
