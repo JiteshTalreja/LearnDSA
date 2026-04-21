@@ -402,3 +402,27 @@ def longest_subarray_sum_k(nums, k):
     return max_len
 print("long optimal:", longest_subarray_sum_k([1, 0, 2, 0, 1], 3))
 
+
+## Optimal using 2 pointer
+
+def longest_subarray_sum_k_optimal2(nums, k):
+    i = 0
+    j = 0
+    total = 0
+    maxi = 0
+
+    while j < len(nums):
+        total += nums[j]
+
+        while total > k:
+            total -= nums[i]
+            i += 1
+
+        if total == k:
+            maxi = max(maxi, j - i + 1)
+
+        j += 1
+
+    return maxi
+
+print("long optimal2:", longest_subarray_sum_k_optimal2([1, 0, 2, 0, 1], 3))
