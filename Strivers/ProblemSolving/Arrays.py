@@ -426,3 +426,58 @@ def longest_subarray_sum_k_optimal2(nums, k):
     return maxi
 
 print("long optimal2:", longest_subarray_sum_k_optimal2([1, 0, 2, 0, 1], 3))
+
+#-----------------------------------------------------------------------------------------------------------------------------------------------------------
+#-----------------------------------------------------------------------------------------------------------------------------------------------------------
+## Q11 2 sum
+
+## Brute
+
+def two_sum_brute(nums, target):
+    n = len(nums)
+    l2 = []
+    for i in range(n):
+        for j in range(i+1, n):
+            sum2 = nums[i]+nums[j]
+            if sum2 == target:
+                l2.append([i, j])
+    return l2
+
+print(two_sum_brute([2,6,5,8,11], 14))
+
+
+## Better
+
+def two_sum_better(nums, target):
+    hash = {}
+    l3 = []
+
+    for i, v  in enumerate(nums):
+        if target - v in hash:
+            l3.append([i, hash[target-v]])
+        hash[v] = i
+    return l3
+print(two_sum_better([2,6,5,8,11], 14))
+
+##Optimal
+
+def two_sum_optimal(nums, target):
+    nums.sort()
+    i = 0
+    j = len(nums)-1
+    l3 = []
+
+    while i < j:
+        sum = nums[i] + nums[j]
+
+        if sum == target:
+            l3.append([i,j])
+            i+=1
+            j-=1
+        elif sum < target:
+            i += 1
+        else:
+            j -= 1
+    return l3
+
+print('2sum_opt', two_sum_optimal([2,6,5,8,11], 14))
