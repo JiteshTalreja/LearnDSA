@@ -538,3 +538,57 @@ def sort_colors_optimal(nums):
             high-=1
     return nums
 
+
+#-----------------------------------------------------------------------------------------------------------------------------------------------------------
+#-----------------------------------------------------------------------------------------------------------------------------------------------------------
+## Q13 Majority Element (find an element from a given array which appear more than n//2 times)
+
+## Brute
+
+def major_brute(nums):
+
+    for i in nums:
+        count=0
+        for j in nums:
+            if j == i:
+                count+=1
+        if count > len(nums)//2:
+            return i
+
+
+print('major brute', major_brute([2,2,3,4,2,4,2,2,2,4,5,2]))
+
+
+## Better (using hash map)
+
+def major_better(nums):
+    mp = {}
+
+    for i in nums:
+        mp[i] =mp.get(i, 0)+1
+
+        if mp[i] > len(nums)//2:
+            return i
+    return None
+
+print('major better', major_better([2,2,3,4,2,4,2,2,2,4,5,2]))
+
+## optimal (using Moore's Voting Algorithm)
+
+def major_optimal(nums):
+    count = 0
+    candidate = 0
+
+    for num in nums:
+        if count ==0:
+            candidate = num
+
+        if num == candidate:
+            count+=1
+        else:
+            count-=1
+        # verification step
+    if nums.count(candidate) > len(nums) // 2:
+        return candidate
+    return None
+print('major optimal111', major_optimal([2,2,3,4,2,4,2,2,2,4,5,2]))
