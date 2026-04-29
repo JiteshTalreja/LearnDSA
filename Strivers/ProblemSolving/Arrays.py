@@ -591,4 +591,50 @@ def major_optimal(nums):
     if nums.count(candidate) > len(nums) // 2:
         return candidate
     return None
-print('major optimal111', major_optimal([2,2,3,4,2,4,2,2,2,4,5,2]))
+print('major optimal', major_optimal([2,2,3,4,2,4,2,2,2,4,5,2]))
+
+#-----------------------------------------------------------------------------------------------------------------------------------------------------------
+#-----------------------------------------------------------------------------------------------------------------------------------------------------------
+## Q14 Kadane's Algorithm (Maximum subarray sum)
+
+## Max Sum
+def max_subarray_sum(nums):
+    current_sum = 0
+    max_sum = float('-inf')
+
+    for num in nums:
+        current_sum +=num
+
+        if current_sum > max_sum:
+            max_sum = current_sum
+
+        if current_sum < 0:
+            current_sum=0
+    return max_sum
+
+print("kadane's sum", max_subarray_sum([-3, -2, -5]))
+
+## Subarray for max sum
+def max_subarray(nums):
+    max_sum = float('-inf')
+    current_sum = 0
+
+    start = end = temp_start = 0
+
+    for i in range(len(nums)):
+        current_sum += nums[i]
+
+        # update answer
+        if current_sum > max_sum:
+            max_sum = current_sum
+            start = temp_start
+            end = i
+
+        # reset if bad
+        if current_sum < 0:
+            current_sum = 0
+            temp_start = i + 1
+
+    return nums[start:end+1], max_sum
+
+print("kadane's sub array", max_subarray([-3, -2, -5]))
