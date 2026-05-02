@@ -638,3 +638,19 @@ def max_subarray(nums):
     return nums[start:end+1], max_sum
 
 print("kadane's sub array", max_subarray([-3, -2, -5]))
+
+
+#-----------------------------------------------------------------------------------------------------------------------------------------------------------
+#-----------------------------------------------------------------------------------------------------------------------------------------------------------
+## Q15 Best Time to Buy and Sell Stock
+
+def stocks(prices):
+    mini = prices[0]
+    profit = 0
+
+    for price in prices:
+        mini = min(mini, price)              # best buy so far
+        profit = max(profit, price - mini)   # best sell
+
+    return profit
+
