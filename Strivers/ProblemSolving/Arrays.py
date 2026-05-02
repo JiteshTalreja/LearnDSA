@@ -644,6 +644,10 @@ print("kadane's sub array", max_subarray([-3, -2, -5]))
 #-----------------------------------------------------------------------------------------------------------------------------------------------------------
 ## Q15 Best Time to Buy and Sell Stock
 
+"""
+prices = [7,1,2,4,6,5,8,2,9]
+"""
+
 def stocks(prices):
     mini = prices[0]
     profit = 0
@@ -654,3 +658,4 @@ def stocks(prices):
 
     return profit
 
+print("profit: ", stocks([7,1,2,4,6,20,8,2,19]))
