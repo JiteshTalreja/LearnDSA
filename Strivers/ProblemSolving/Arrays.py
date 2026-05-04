@@ -659,3 +659,66 @@ def stocks(prices):
     return profit
 
 print("profit: ", stocks([7,1,2,4,6,20,8,2,19]))
+
+#-----------------------------------------------------------------------------------------------------------------------------------------------------------
+#-----------------------------------------------------------------------------------------------------------------------------------------------------------
+## Q16 Rearrange array elements by the sign
+
+## Brute ( Time Complexity: O(n) + O(n), Space Complexity O(n)
+def arrange_brute(nums):
+    pos = []
+    neg = []
+    for i in nums:
+        if i > 0:
+            pos.append(i)
+        else:
+            neg.append(i)
+
+    for i in range(len(nums)//2):
+        nums[2*i] = pos[i]
+        nums[2*i+1] = neg[i]
+    return nums
+
+print("arrange brute :", arrange_brute([3,1,-2,-5,2,-4]))
+
+
+## optimal
+
+def arrange_optimal(nums):
+    n = len(nums)
+    res = [0]*n
+    pos = 0
+    neg = 1
+
+    for num in nums:
+        if num > 0:
+            res[pos] = num
+            pos +=2
+        else:
+            res[neg] = num
+            neg +=2
+    return res
+
+print("arrange optimal :", arrange_optimal([3,1,-2,-5,2,-4]))
+
+## Variation: When unequal number of elements are present
+
+## nums: [-1,2,3,4,-3,1]
+
+def rearrange_variation(nums):
+    pos = [x for x in nums if x >= 0]
+    neg = [x for x in nums if x < 0]
+
+    res = []
+    i = j = 0
+
+    # alternate
+    while i < len(pos) and j < len(neg):
+        res.append(pos[i]); i += 1
+        res.append(neg[j]); j += 1
+
+    # remaining elements
+    res.extend(pos[i:])
+    res.extend(neg[j:])
+
+    return res
