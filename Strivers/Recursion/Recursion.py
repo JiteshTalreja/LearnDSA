@@ -97,3 +97,34 @@ def nth_fibonacci(n):
         return n
 
     return nth_fibonacci(n-1) + nth_fibonacci(n-2)
+
+
+"""
+Q8 print all subsequences
+"""
+
+
+def print_subsequences(nums):
+
+    result = []
+
+    def backtrack(index, path):
+
+        # base case
+        if index == len(nums):
+            result.append(path[:])
+            return
+
+        # TAKE
+        path.append(nums[index])
+        backtrack(index + 1, path)
+
+        # BACKTRACK
+        path.pop()
+
+        # NOT TAKE
+        backtrack(index + 1, path)
+
+    backtrack(0, [])
+
+    return result
