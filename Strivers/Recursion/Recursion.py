@@ -128,3 +128,5 @@ def print_subsequences(nums):
     backtrack(0, [])
 
     return result
+
+print(print_subsequences([3,1,2]))
