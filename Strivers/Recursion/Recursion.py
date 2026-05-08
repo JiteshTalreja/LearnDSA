@@ -101,6 +101,17 @@ def nth_fibonacci(n):
 
 """
 Q8 print all subsequences
+
+def func(index, arr):
+    if index == len(arr):
+        # base condition
+        return
+
+    # pick
+    func(index + 1)
+
+    # not pick
+    func(index + 1)
 """
 
 
@@ -130,3 +141,86 @@ def print_subsequences(nums):
     return result
 
 print(print_subsequences([3,1,2]))
+
+"""
+Q9 Print all subsequences that make sum k 
+"""
+def print_subsequences_sum_k(nums, k):
+    result = []
+    def backtrack(index, path, current_sum):
+
+        # base case
+        if index == len(nums):
+
+            if current_sum == k:
+                result.append(path[:])
+
+            return
+
+        # TAKE
+        path.append(nums[index])
+
+        backtrack(
+            index + 1,
+            path,
+            current_sum + nums[index]
+        )
+
+        # BACKTRACK
+        path.pop()
+
+        # DON'T TAKE
+        backtrack(
+            index + 1,
+            path,
+            current_sum
+        )
+
+    backtrack(0, [], 0)
+    return result
+
+
+print("subsequence with sum k :", print_subsequences_sum_k([1,2,1], 2))
+
+"""
+Q10 Print only one subsequences that make sum k 
+"""
+def print_one(index, arr, ds, s, k):
+    if index == len(arr):
+        if s == k:
+            print(ds)
+            return True
+        return False
+
+    # pick
+    ds.append(arr[index])
+
+    if print_one(index + 1, arr, ds, s + arr[index], k):
+        return True
+
+    ds.pop()
+
+    # not pick
+    if print_one(index + 1, arr, ds, s, k):
+        return True
+
+    return False
+
+
+"""
+Q11 Count Subsequences with Sum = K
+"""
+
+def count_subseq(index, arr, s, k):
+    if index == len(arr):
+        if s == k:
+            return 1
+        return 0
+
+    # pick
+    left = count_subseq(index + 1, arr, s + arr[index], k)
+
+    # not pick
+    right = count_subseq(index + 1, arr, s, k)
+
+    return left + right
