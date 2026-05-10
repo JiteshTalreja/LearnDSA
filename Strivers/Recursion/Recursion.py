@@ -224,3 +224,167 @@ def count_subseq(index, arr, s, k):
     right = count_subseq(index + 1, arr, s, k)
 
     return left + right
+
+"""
+Combination Sum:
+"""
+"""
+| Problem            | Reuse allowed? | Duplicates in input? |
+| ------------------ | -------------- | -------------------- |
+| Combination Sum I  | ✅ Yes          | ❌ Distinct           |
+| Combination Sum II | ❌ No           | ✅ Yes                |
+
+🧠 Core Idea
+
+Combination Sum is a classic recursion + backtracking problem where we try to build all possible combinations whose sum equals a target.
+
+At every step we make a decision:
+
+1. Pick current element
+2. Do not pick current element
+
+This creates a decision tree (DFS traversal).
+
+🔥 Key Concepts
+1. Recursion
+
+We recursively explore all possible combinations.
+
+Each recursive call represents:
+
+current state of combination
+2. Backtracking
+
+Backtracking means:
+
+make choice → recurse → undo choice
+
+Pattern:
+
+append
+recurse
+pop
+
+The pop() step restores previous state so other branches can be explored.
+
+🌳 Decision Tree Thinking
+
+For every element:
+
+take / not take
+
+This forms a recursion tree of possibilities.
+
+Example:
+
+[]
+├── take 2
+│   ├── take 2
+│   └── skip 2
+└── skip 2
+🟢 Combination Sum I
+Rules
+Input elements are distinct
+Same element can be reused multiple times
+Important recursion behavior
+
+When taking an element:
+
+backtrack(index, ...)
+
+We stay on same index because reuse is allowed.
+
+🔴 Combination Sum II
+Rules
+Input may contain duplicates
+Each element can be used only once
+Output combinations must be unique
+Important recursion behavior
+
+When taking an element:
+
+backtrack(index + 1, ...)
+
+Move forward because reuse is NOT allowed.
+"""
+
+
+"""
+Q12 Combination Sum I
+"""
+
+def combination_sum(nums, target):
+    res = []
+
+    def backtracking(index, path, total):
+
+        # found answer
+        if total == target:
+            res.append(path[:])
+            return
+
+        if total > target or index >= len(nums):
+            return
+
+        # PICK current element
+        path.append(nums[index])
+        backtracking(index, path, total + nums[index])
+
+        # BACKTRACK
+        path.pop()
+
+        # NOT PICK
+        backtracking(index + 1, path, total)
+
+    backtracking(0, [], 0)
+    return res
+
+print("combination sum I: ", combination_sum([2,2,3], 7))
+
+
+"""
+Q13 Combination Sum II
+
+| Problem            | Reuse allowed? | Duplicates in input? |
+| ------------------ | -------------- | -------------------- |
+| Combination Sum I  | ✅ Yes          | ❌ Distinct           |
+| Combination Sum II | ❌ No           | ✅ Yes                |
+
+"""
+
+def combination_sum2(nums, target):
+    nums.sort()
+    res = []
+
+    def backtrack(start, path, total):
+
+        # found answer
+        if total == target:
+            res.append(path[:])
+            return
+
+        # exceeded target
+        if total > target:
+            return
+
+        for i in range(start, len(nums)):
+
+            # SKIP DUPLICATES
+            if i > start and nums[i] == nums[i - 1]:
+                continue
+
+            # pruning
+            if total + nums[i] > target:
+                break
+
+            path.append(nums[i])
+
+            # move to next index (NO reuse)
+            backtrack(i + 1, path, total + nums[i])
+
+            path.pop()
+
+    backtrack(0, [], 0)
+    return res
+
+print("combination sum I: ", combination_sum2([1,1,1,2,2], 4))
