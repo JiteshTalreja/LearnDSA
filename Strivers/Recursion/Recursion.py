@@ -387,4 +387,33 @@ def combination_sum2(nums, target):
     backtrack(0, [], 0)
     return res
 
-print("combination sum I: ", combination_sum2([1,1,1,2,2], 4))
+print("combination sum II: ", combination_sum2([1,1,1,2,2], 4))
+
+def comb_sum2(nums, target):
+
+    nums.sort()
+    res = []
+
+    def back(idx, path, total):
+
+        if total == target:
+            res.append(path[:])
+            return
+        if idx > len(nums):
+            return
+
+        for i in range(idx, len(nums)):
+
+            if i > idx and nums[i] == nums[i-1]:
+                continue
+
+            if total + nums[i] > target:
+                break
+
+            path.append(nums[i])
+            back(i+1, path, total+nums[i])
+            path.pop()
+    back(0, [], 0)
+    return res
+
+print("combination sum II V2: ", combination_sum2([1,1,1,2,2], 4))
