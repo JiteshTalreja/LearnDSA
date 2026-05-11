@@ -417,3 +417,193 @@ def comb_sum2(nums, target):
     return res
 
 print("combination sum II V2: ", combination_sum2([1,1,1,2,2], 4))
+
+"""
+Subset sum
+"""
+"""
+Subset Sum — Theory Notes
+🧠 Problem Idea
+
+Subset Sum problems ask:
+
+“Can we form a target sum using some subset of elements?”
+
+A subset means:
+
+pick OR not pick each element
+
+Order does NOT matter.
+
+🔥 Core Pattern
+
+At every index:
+
+1. Take current element
+2. Skip current element
+
+This creates a:
+
+binary decision tree
+🌳 Recursion Tree Thinking
+
+Example:
+
+nums = [1,2]
+
+Tree:
+
+[]
+├── take 1
+│   ├── take 2 → [1,2]
+│   └── skip 2 → [1]
+└── skip 1
+    ├── take 2 → [2]
+    └── skip 2 → []
+
+Total subsets:
+
+2^n
+
+because every element has 2 choices.
+
+🧠 Common Variations
+Problem	Goal
+Subset Sum Exists	return True/False
+Count Subsets	return number of subsets
+Print Subsets	return all subsets
+Equal Partition	split array equally
+Target Sum	+/- operations
+
+🔥 Basic Recursive Structure
+def solve(index, total):
+
+    # pick
+    solve(index + 1, total + nums[index])
+
+    # not pick
+    solve(index + 1, total)
+🧠 Base Condition
+
+Usually:
+
+if index == len(nums):
+
+Then:
+
+check sum
+return result
+count subset
+print subset
+
+depending on problem.
+
+🔥 Backtracking Concept
+
+When storing subsets:
+
+append
+recurse
+pop
+
+The pop() step restores previous state.
+
+🚀 Optimization Insight
+
+Pure recursion:
+
+O(2^n)
+
+because all subsets may be explored.
+
+Later this becomes:
+
+Dynamic Programming
+
+using memoization/tabulation.
+
+🧠 Important DP Connection
+
+Subset Sum is one of the MOST important DP foundations.
+
+Reason:
+
+same subproblems repeat
+
+Example:
+
+(index=3, sum=7)
+
+may get recomputed many times.
+
+DP stores these results.
+
+🔥 Key Mental Model
+
+Subset Sum problems are basically:
+
+DFS on a decision tree
+
+with:
+
+pick / not pick recursion
+⚠️ Important Difference
+Combination Sum	Subset Sum
+target construction	subset existence/count
+reuse may happen	usually no reuse
+combinations	subsets
+"""
+
+"""
+Q14 Subset Sum I
+"""
+def subset_sum(nums):
+    res = []
+
+    def backtracking(index, total):
+        if index == len(nums):
+            res.append(total)
+            return
+
+        # Pick
+        backtracking(index+1, total + nums[index])
+
+        # Not Pick
+        backtracking(index+1, total)
+
+    backtracking(0, 0)
+    return sorted(res)
+
+print("subset sum I: ", subset_sum([3,1,4]))
+
+"""
+Q15 Subset Sum II
+"""
+
+def subsets2(nums):
+
+    nums.sort()
+    res = []
+
+    def backtrack(start, path):
+
+        # store every subset
+        res.append(path[:])
+
+        for i in range(start, len(nums)):
+
+            # SKIP DUPLICATES
+            if i > start and nums[i] == nums[i - 1]:
+                continue
+
+            path.append(nums[i])
+
+            backtrack(i + 1, path)
+
+            path.pop()
+
+    backtrack(0, [])
+
+    return res
+
+print("subset II: ", subsets2([1,2,3]))
