@@ -607,3 +607,66 @@ def subsets2(nums):
     return res
 
 print("subset II: ", subsets2([1,2,3]))
+
+"""
+Q16 Print all Permutations of a String/Array | Recursion
+"""
+
+def permutations(nums):
+    res = []
+    seen = [False]*len(nums)
+
+    def backtrack(path):
+
+        if len(path) == len(nums):
+            res.append(path[:])
+            return
+
+        for i in range(len(nums)):
+
+            if seen[i]:
+                continue
+
+            seen[i] = True
+
+            path.append(nums[i])
+            backtrack(path)
+
+            # Backtrack
+
+            path.pop()
+            seen[i] = False
+    backtrack([])
+
+    return res
+
+print("permutations 1: ", permutations([1,2,3]))
+
+"""
+Another method to solve this
+"""
+
+def permutations2(nums):
+
+    res = []
+
+    def backtrack(index):
+
+        if index == len(nums):
+            res.append(nums[:])
+            return
+
+        for i in range(index, len(nums)):
+
+            nums[index], nums[i] = nums[i], nums[index]
+
+            backtrack(index + 1)
+
+            # BACKTRACK
+            nums[index], nums[i] = nums[i], nums[index]
+
+    backtrack(0)
+
+    return res
+
+print("permutations 2: ", permutations2([1,2,3]))
