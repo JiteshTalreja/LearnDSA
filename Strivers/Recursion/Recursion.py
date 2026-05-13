@@ -670,3 +670,57 @@ def permutations2(nums):
     return res
 
 print("permutations 2: ", permutations2([1,2,3]))
+
+"""
+Q17 N-Queens
+
+in an NxN chess board position exactly n queens such that 
+1. all rows have 1 queen
+2. all columns have 1 queen
+3. no queen should attack other queen
+"""
+
+def n_queens(n):
+
+    res = []
+
+    board = [["."] * n for _ in range(n)]
+
+    rows = set()
+    pos_diag = set()
+    neg_diag = set()
+
+    def backtrack(col):
+
+        if col == n:
+            copy = ["".join(r) for r in board]
+            res.append(copy)
+            return
+
+        for row in range(n):
+
+            if (
+                row in rows or
+                    (row + col) in pos_diag or
+                    (row - col) in neg_diag
+            ):
+                continue
+
+            rows.add(row)
+            pos_diag.add(row+col)
+            neg_diag.add(row-col)
+
+            board[row][col] = "Q"
+            backtrack(col+1)
+
+            # backtrack
+            rows.remove(row)
+            pos_diag.remove(row+col)
+            neg_diag.remove(row-col)
+
+            board[row][col] = "."
+
+    backtrack(0)
+    return res
+
+print("N-Queens: ", n_queens(4))
