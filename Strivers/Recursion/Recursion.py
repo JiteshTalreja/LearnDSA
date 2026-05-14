@@ -724,3 +724,59 @@ def n_queens(n):
     return res
 
 print("N-Queens: ", n_queens(4))
+
+
+"""
+Sudoku_solver
+"""
+
+
+def sudoku_solver(board):
+
+    def is_valid(row, col, num):
+        for r in range(9):
+            if board[row][r] == num:
+                return False
+
+        for c in range(9):
+            if board[c][col] == num:
+                return False
+
+        ## check for sun-matrix
+
+        box_row = (row // 3) * 3
+        box_col = (col // 3) * 3
+
+        for br in range(box_row, box_row+3):
+            for bc in range(box_col, box_col+3):
+                if board[br][bc] == num:
+                    return False
+
+        return True
+
+    def backtrack():
+
+        for row in range(9):
+
+            for col in range(9):
+
+                if board[row][col] == '.':
+
+                    for num in '123456789':
+                        if is_valid(row, col, num):
+
+                            # Place
+                            board[row][col] = num
+
+                            if backtrack():
+                                return True
+
+                            # Backtrack
+
+                            board[row][col] = '.'
+                    return False
+
+        return True
+
+    backtrack()
+    return board
