@@ -780,3 +780,69 @@ def sudoku_solver(board):
 
     backtrack()
     return board
+
+## Optimised a little.
+
+class Solution:
+
+    def solveSudoku(self, board):
+
+        rows = [set() for _ in range(9)]
+        cols = [set() for _ in range(9)]
+        boxes = [set() for _ in range(9)]
+
+        # preload existing numbers
+        for r in range(9):
+            for c in range(9):
+
+                if board[r][c] != ".":
+
+                    num = board[r][c]
+
+                    rows[r].add(num)
+                    cols[c].add(num)
+
+                    box_idx = (r // 3) * 3 + (c // 3)
+                    boxes[box_idx].add(num)
+
+        def backtrack():
+
+            for r in range(9):
+                for c in range(9):
+
+                    if board[r][c] == ".":
+
+                        for num in "123456789":
+
+                            box_idx = (r // 3) * 3 + (c // 3)
+
+                            # O(1) validation
+                            if (
+                                num in rows[r] or
+                                num in cols[c] or
+                                num in boxes[box_idx]
+                            ):
+                                continue
+
+                            # PLACE
+                            board[r][c] = num
+
+                            rows[r].add(num)
+                            cols[c].add(num)
+                            boxes[box_idx].add(num)
+
+                            if backtrack():
+                                return True
+
+                            # BACKTRACK
+                            board[r][c] = "."
+
+                            rows[r].remove(num)
+                            cols[c].remove(num)
+                            boxes[box_idx].remove(num)
+
+                        return False
+
+            return True
+
+        backtrack()
