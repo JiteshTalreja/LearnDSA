@@ -728,3 +728,34 @@ def rearrange_variation(nums):
 ## Q17 Given an array nums of distinct integers, return next permutations. (similar questions Asked in Nike round)
 
 
+def next_permutation(nums):
+
+    n= len(nums)
+
+    i = n-2
+
+
+    #pivot point
+    while i >=0 and nums[i] >= nums[i+1]:
+        i-=1
+
+    # next greatest
+
+    if i>=0:
+
+        j = n-1
+
+        while nums[j] <= nums[i]:
+            j-=1
+
+        nums[j], nums[i] = nums[i], nums[j]
+
+    left = i+1
+    right = n-1
+
+    while left < right:
+        nums[left], nums[right] = nums[right], nums[left]
+        left+=1
+        right-=1
+    return nums
+print("next permutation: ",next_permutation([2,1,5,4,3,0,0,]))
