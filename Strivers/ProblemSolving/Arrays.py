@@ -759,3 +759,40 @@ def next_permutation(nums):
         right-=1
     return nums
 print("next permutation: ",next_permutation([2,1,5,4,3,0,0,]))
+
+
+#-----------------------------------------------------------------------------------------------------------------------------------------------------------
+#-----------------------------------------------------------------------------------------------------------------------------------------------------------
+## Q18 Find leaders in an array (leaders: an element in an array left of which are only smaller values ex. [10, 22, 12, 3, 0, 6], here 22, 12 and 6 are leaders)
+
+## [10, 22, 12, 3, 0, 6]
+
+## Brute
+def leaders_brute(nums):
+    res = []
+
+    for i in range(len(nums)):
+        leader = True
+        for j in range(i+1, len(nums)):
+            if nums[j] > nums[i]:
+                leader = False
+                break
+        if leader:
+            res.append(nums[i])
+    return res
+
+print("leaders brute: ", leaders_brute([10, 22, 12, 3, 0, 6]))
+
+## Optimal
+def leaders_optimal(nums):
+    maxi = float('-inf')
+    res = []
+    for num in nums[::-1]:
+        if num>maxi:
+            maxi = num
+            res.append(num)
+
+    # return res[::-1]
+    return res
+
+print("leaders optimal: ", leaders_optimal([10, 22, 12, 3, 0, 6]))
