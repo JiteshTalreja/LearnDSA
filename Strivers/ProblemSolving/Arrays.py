@@ -796,3 +796,80 @@ def leaders_optimal(nums):
     return res
 
 print("leaders optimal: ", leaders_optimal([10, 22, 12, 3, 0, 6]))
+
+
+#-----------------------------------------------------------------------------------------------------------------------------------------------------------
+#-----------------------------------------------------------------------------------------------------------------------------------------------------------
+##19 Longest Consecutive Sequence
+
+## Brute
+
+def longest_consecutive_brute(nums):
+
+    longest = 0
+    for num in nums:
+        current = num
+        count = 1
+
+        while current+1 in nums:
+
+            current = current+1
+            count+=1
+
+        longest = max(count, longest)
+
+    return longest
+
+print("longest consecutive sequence brute: ", longest_consecutive_brute([102, 4, 100, 1, 101, 3,2,1,5]))
+
+## Better
+def longest_consecutive_better(nums):
+
+    if not nums:
+        return 0
+
+    nums.sort()
+
+    longest = 1
+    count = 0
+    last_smaller = float('-inf')
+
+    for num in nums:
+
+        if num - 1 == last_smaller:
+
+            count += 1
+            last_smaller = num
+
+        elif num != last_smaller:
+
+            count = 1
+            last_smaller = num
+
+        longest = max(longest, count)
+
+    return longest
+
+## Optimal
+def longest_consecutive_optimal(nums):
+
+    num_set = set(nums)
+
+    longest = 0
+
+    for num in num_set:
+
+        # start of sequence
+        if num - 1 not in num_set:
+
+            current = num
+            count = 1
+
+            while current + 1 in num_set:
+
+                current += 1
+                count += 1
+
+            longest = max(longest, count)
+
+    return longest
