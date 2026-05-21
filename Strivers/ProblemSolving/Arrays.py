@@ -873,3 +873,81 @@ def longest_consecutive_optimal(nums):
             longest = max(longest, count)
 
     return longest
+
+#-----------------------------------------------------------------------------------------------------------------------------------------------------------
+#-----------------------------------------------------------------------------------------------------------------------------------------------------------
+##Q20 Set Matrix Zeroes | O(1) Space Approach | Brute - Better - Optimal
+## find 0's in an NxM matrix and set that column and row to 0
+
+
+## Brute
+
+def set_matrix_brute(matrix):
+
+    rows = len(matrix)
+    cols = len(matrix[0])
+
+    def set_row(row):
+        for i in range(cols):
+            if matrix[row][i] !=0:
+                matrix[row][i] =-1
+
+    def set_col(col):
+        for j in range(rows):
+            if matrix[j][col] != 0:
+                matrix[j][col]=-1
+
+    for r in range(rows):
+
+        for c in range(cols):
+            if matrix[r][c] == 0:
+                set_row(r)
+                set_col(c)
+
+    for r in range(rows):
+
+        for c in range(cols):
+            if matrix[r][c]==-1:
+                matrix[r][c]=0
+
+    return matrix
+
+print("set_matrix_brute: ", set_matrix_brute([
+ [1,1,1],
+ [1,0,1],
+ [1,1,1]
+]))
+
+## optimal
+
+def set_matrix_optimal(matrix):
+    rows = len(matrix)
+    cols = len(matrix[0])
+
+    col0 = 1
+
+    for r in range(rows):
+        if matrix[r][0] == 0:
+            col0 = 0
+
+        for c in range(1, cols):
+
+            if matrix[r][c] == 0:
+                matrix[r][0] = 0
+                matrix[0][c] = 0
+    for r in range(1, rows):
+
+        for c in range(1, cols):
+
+            if matrix[0][c] == 0 or matrix[r][0] ==0:
+                matrix[r][c] = 0
+    if matrix[0][0] == 0:
+        for i in range(cols):
+
+            matrix[0][i] = 0
+
+    if col0 ==0:
+
+        for r in range(rows):
+            matrix[r][0] = 0
+    return matrix
