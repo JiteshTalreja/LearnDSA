@@ -951,3 +951,36 @@ def set_matrix_optimal(matrix):
         for r in range(rows):
             matrix[r][0] = 0
     return matrix
+
+#-----------------------------------------------------------------------------------------------------------------------------------------------------------
+#-----------------------------------------------------------------------------------------------------------------------------------------------------------
+##Q21 Rotate a matrix by 90 degrees
+
+## Brute
+
+def rotate_matrix_brute(matrix):
+    n = len(matrix)
+
+    res = [[0] * n for _ in range(n)]
+
+    for row in range(n):
+        for col in range(n):
+            res[col][n-row-1] = matrix[row][col]
+    return res
+
+## Optimal
+
+def rotate_matrix_optimal(matrix):
+    n = len(matrix)
+
+    for row in range(n):
+
+        for col in range(row+1, n):
+
+            matrix[row][col], matrix[col][row] = matrix[col][row], matrix[row][col]
+
+    # STEP 2: REVERSE EACH ROW
+    for row in matrix:
+        row.reverse()
+
+    return matrix
