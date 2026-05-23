@@ -984,3 +984,54 @@ def rotate_matrix_optimal(matrix):
         row.reverse()
 
     return matrix
+
+
+#-----------------------------------------------------------------------------------------------------------------------------------------------------------
+#-----------------------------------------------------------------------------------------------------------------------------------------------------------
+##Q22 Spiral Traversal of a Matrix | Spiral Matrix
+
+def sprial_traversal_matrix(matrix):
+
+    res = []
+    rows = len(matrix)
+    cols = len(matrix[0])
+
+    top = 0
+    bottom = rows - 1
+
+    left = 0
+    right = cols - 1
+
+    while top<=bottom and left<=right:
+
+        ## Left to Right
+        for i in range(left, right+1):
+            res.append(matrix[top][i])
+        top+=1
+
+        ## Top to Bottom
+
+        for j in range(top, bottom+1):
+            res.append(matrix[j][right])
+
+        right -=1
+
+        ## Right to Left
+
+        if top<=bottom:
+            for k in range(right, left-1, -1):
+                res.append(matrix[bottom][k])
+
+            bottom -=1
+
+        ## Bottom to Top
+
+        if left<=right:
+
+            for l in range(bottom, top-1, -1):
+                res.append(matrix[l][left])
+            left+=1
+
+    return res
+
+
