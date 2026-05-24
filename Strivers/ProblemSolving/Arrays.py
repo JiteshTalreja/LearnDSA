@@ -990,7 +990,7 @@ def rotate_matrix_optimal(matrix):
 #-----------------------------------------------------------------------------------------------------------------------------------------------------------
 ##Q22 Spiral Traversal of a Matrix | Spiral Matrix
 
-def sprial_traversal_matrix(matrix):
+def spiral_traversal_matrix(matrix):
 
     res = []
     rows = len(matrix)
@@ -1035,3 +1035,43 @@ def sprial_traversal_matrix(matrix):
     return res
 
 
+#-----------------------------------------------------------------------------------------------------------------------------------------------------------
+#-----------------------------------------------------------------------------------------------------------------------------------------------------------
+##Q23 Count Subarray sum Equals K | Brute - Better - Optimal
+
+## Brute
+
+def count_subarray_sum_brute(nums, target):
+    n = len(nums)
+    res = 0
+    for i in range(n):
+        for j in range(i, n):
+
+            sum = 0
+            for k in range(i, j+1):
+                sum += nums[k]
+            if sum == target:
+                res+=1
+    return res
+
+## Better
+def count_subarray_sum_better(nums, target):
+
+    n = len(nums)
+
+    res = 0
+
+    for i in range(n):
+
+        total = 0
+
+        for j in range(i, n):
+
+            total += nums[j]
+
+            if total == target:
+                res += 1
+
+    return res
+
+## Optimal (Prefix Sum)
