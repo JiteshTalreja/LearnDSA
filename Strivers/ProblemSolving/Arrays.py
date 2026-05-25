@@ -1075,3 +1075,18 @@ def count_subarray_sum_better(nums, target):
     return res
 
 ## Optimal (Prefix Sum)
+def count_subarray_sum_optimal(nums, k):
+    mp = {0: 1}
+    presum = 0
+    count=0
+
+    for i in nums:
+        presum+=i
+
+        count+=mp.get(presum-k, 0)
+        mp[presum] = mp.get(presum, 0) + 1
+    return count
+
+print("count Subarray Brute:", count_subarray_sum_brute([1,2,3,-3,1,1,1,4,2,-3], 3))
+print("count Subarray Better:", count_subarray_sum_better([1,2,3,-3,1,1,1,4,2,-3], 3))
+print("count Subarray optimal:", count_subarray_sum_optimal([1,2,3,-3,1,1,1,4,2,-3], 3))
