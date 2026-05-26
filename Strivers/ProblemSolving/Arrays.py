@@ -1090,3 +1090,109 @@ def count_subarray_sum_optimal(nums, k):
 print("count Subarray Brute:", count_subarray_sum_brute([1,2,3,-3,1,1,1,4,2,-3], 3))
 print("count Subarray Better:", count_subarray_sum_better([1,2,3,-3,1,1,1,4,2,-3], 3))
 print("count Subarray optimal:", count_subarray_sum_optimal([1,2,3,-3,1,1,1,4,2,-3], 3))
+
+#-----------------------------------------------------------------------------------------------------------------------------------------------------------
+#-----------------------------------------------------------------------------------------------------------------------------------------------------------
+##Q24 Pascal Triangle | Finding nCr in minimal time
+## Type of question: Given Row and column find the element at that place
+## print Nth row of pascal triangle
+## Given N print the pascal triangle
+
+def print_pascal_triangle(row):
+    triangle = []
+
+    for r in range(row):
+        temp = []
+
+        for c in range(r+1):
+
+            if c == 0 or c==r:
+                temp.append(1)
+            else:
+                temp.append(triangle[r-1][c-1] + triangle[r-1][c])
+        triangle.append(temp)
+    return triangle
+
+
+print("Pascal Triangle: ", print_pascal_triangle(6))
+
+## Type 1: Given Row and column find the element at that place
+
+## Brute: Make the entie triangle
+
+## Better
+import math
+
+def pascal_better(row, col):
+
+    n = row - 1
+    r = col - 1
+
+    return (
+        math.factorial(n)
+        //
+        (
+            math.factorial(r)
+            * math.factorial(n-r)
+        )
+    )
+
+## Optimal
+def pascal_optimal(row, col):
+
+    n = row - 1
+    r = col - 1
+
+    res = 1
+
+    for i in range(r):
+
+        res = res * (n - i)
+
+        res = res // (i + 1)
+
+    return res
+
+
+## Type 2: print Nth row of pascal triangle
+
+## optimal
+def pascal_nth_row_optimal(n):
+
+    ans = [1]
+
+    res = 1
+
+    for c in range(1, n):
+
+        res = res * (n - c)
+        res = res // c
+
+        ans.append(res)
+
+    return ans
+
+## Type 3 : Given N print the pascal triangle
+
+## Optimal
+
+def generate_pascal_triangle(n):
+
+    triangle = []
+
+    for row in range(n):
+
+        temp = [1]
+
+        res = 1
+
+        for col in range(1, row + 1):
+
+            res = res * (row - col + 1)
+            res = res // col
+
+            temp.append(res)
+
+        triangle.append(temp)
+
+    return triangle
