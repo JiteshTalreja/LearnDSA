@@ -1196,3 +1196,95 @@ def generate_pascal_triangle(n):
         triangle.append(temp)
 
     return triangle
+
+
+#-----------------------------------------------------------------------------------------------------------------------------------------------------------
+#-----------------------------------------------------------------------------------------------------------------------------------------------------------
+##Q25 Majority Element II | Brute-Better-Optimal (Majority Element I use Moore's Voting Algorithm)
+
+## Brute
+def majority_element1_brute(nums):
+    n = len(nums)
+
+    res = []
+
+    for i in nums:
+        if i in res:
+            continue
+
+        count = 0
+        for num in nums:
+            if num == i:
+                count+=1
+        if count > n//3:
+            res.append(i)
+    return res
+
+##  Better
+
+def majority_element1_better(nums):
+
+    mp = {}
+    res = []
+    n = len(nums)
+    for i in nums:
+        mp[i] = mp.get(i, 0)+1
+
+        if mp[i] > n//3 and i not in res:
+            res.append(i)
+    return res
+
+## optimal
+
+def majority_element_optimal(nums):
+
+    count1 = 0
+    count2 = 0
+
+    elem1 = None
+    elem2 = None
+
+    # STEP 1: FIND POTENTIAL CANDIDATES
+    for num in nums:
+
+        if elem1 == num:
+            count1 += 1
+
+        elif elem2 == num:
+            count2 += 1
+
+        elif count1 == 0:
+            elem1 = num
+            count1 = 1
+
+        elif count2 == 0:
+            elem2 = num
+            count2 = 1
+
+        else:
+            count1 -= 1
+            count2 -= 1
+
+    # STEP 2: VERIFY CANDIDATES
+    count1 = 0
+    count2 = 0
+
+    for num in nums:
+
+        if num == elem1:
+            count1 += 1
+
+        elif num == elem2:
+            count2 += 1
+
+    res = []
+
+    n = len(nums)
+
+    if count1 > n // 3:
+        res.append(elem1)
+
+    if count2 > n // 3:
+        res.append(elem2)
+
+    return res
