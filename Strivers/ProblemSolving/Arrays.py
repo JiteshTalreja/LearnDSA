@@ -1288,3 +1288,87 @@ def majority_element_optimal(nums):
         res.append(elem2)
 
     return res
+
+#-----------------------------------------------------------------------------------------------------------------------------------------------------------
+#-----------------------------------------------------------------------------------------------------------------------------------------------------------
+##Q26 3 Sum
+
+## Brute
+
+def three_sum_brute(nums):
+    res = set()
+    n = len(nums)
+
+    for i in range(n):
+        for j in range(i+1, n):
+            for k in range(j+1, n):
+
+                if nums[i] + nums[j] + nums[k] == 0:
+                    triplet = sorted([nums[i], nums[j], nums[k]])
+                    res.add(tuple(triplet))
+    return [list(x) for x in res]
+
+
+## Better
+def three_sum_better(nums):
+    n = len(nums)
+    res = set()
+    for i in range(n):
+        seen = set()
+        for j in range(i+1, n):
+            third = -(nums[i]+nums[j])
+            if third in seen:
+                triplet = sorted([nums[i], nums[j], third])
+                res.add(tuple(triplet))
+            seen.add(nums[j])
+    return [list(x) for x in res]
+
+## Better
+def three_sum_optimal(nums):
+
+    nums.sort()
+
+    n = len(nums)
+
+    res = []
+
+    for i in range(n):
+
+        # SKIP DUPLICATES
+        if i > 0 and nums[i] == nums[i - 1]:
+            continue
+
+        left = i + 1
+        right = n - 1
+
+        while left < right:
+
+            total = nums[i] + nums[left] + nums[right]
+
+            if total < 0:
+
+                left += 1
+
+            elif total > 0:
+
+                right -= 1
+
+            else:
+
+                res.append([
+                    nums[i],
+                    nums[left],
+                    nums[right]
+                ])
+
+                left += 1
+                right -= 1
+
+                # SKIP DUPLICATES
+                while left < right and nums[left] == nums[left - 1]:
+                    left += 1
+
+                while left < right and nums[right] == nums[right + 1]:
+                    right -= 1
+
+    return res
