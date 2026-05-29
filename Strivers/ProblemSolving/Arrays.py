@@ -1372,3 +1372,136 @@ def three_sum_optimal(nums):
                     right -= 1
 
     return res
+
+#-----------------------------------------------------------------------------------------------------------------------------------------------------------
+#-----------------------------------------------------------------------------------------------------------------------------------------------------------
+##Q27 4 sum
+
+## Brute
+def four_sum_brute(nums, target):
+
+    n = len(nums)
+
+    res = set()
+
+    for i in range(n):
+
+        for j in range(i + 1, n):
+
+            for k in range(j + 1, n):
+
+                for l in range(k + 1, n):
+
+                    if nums[i] + nums[j] + nums[k] + nums[l] == target:
+
+                        quad = sorted([
+                            nums[i],
+                            nums[j],
+                            nums[k],
+                            nums[l]
+                        ])
+
+                        res.add(tuple(quad))
+
+    return [list(x) for x in res]
+
+## Better
+def four_sum_better(nums, target):
+
+    n = len(nums)
+
+    res = set()
+
+    for i in range(n):
+
+        for j in range(i + 1, n):
+
+            seen = set()
+
+            for k in range(j + 1, n):
+
+                fourth = target - (
+                    nums[i] +
+                    nums[j] +
+                    nums[k]
+                )
+
+                if fourth in seen:
+
+                    quad = sorted([
+                        nums[i],
+                        nums[j],
+                        nums[k],
+                        fourth
+                    ])
+
+                    res.add(tuple(quad))
+
+                seen.add(nums[k])
+
+    return [list(x) for x in res]
+
+## Optimal
+def four_sum_optimal(nums, target):
+
+    nums.sort()
+
+    n = len(nums)
+
+    res = []
+
+    for i in range(n):
+
+        if i > 0 and nums[i] == nums[i - 1]:
+            continue
+
+        for j in range(i + 1, n):
+
+            if j > i + 1 and nums[j] == nums[j - 1]:
+                continue
+
+            left = j + 1
+            right = n - 1
+
+            while left < right:
+
+                total = (
+                    nums[i]
+                    + nums[j]
+                    + nums[left]
+                    + nums[right]
+                )
+
+                if total < target:
+
+                    left += 1
+
+                elif total > target:
+
+                    right -= 1
+
+                else:
+
+                    res.append([
+                        nums[i],
+                        nums[j],
+                        nums[left],
+                        nums[right]
+                    ])
+
+                    left += 1
+                    right -= 1
+
+                    while (
+                        left < right
+                        and nums[left] == nums[left - 1]
+                    ):
+                        left += 1
+
+                    while (
+                        left < right
+                        and nums[right] == nums[right + 1]
+                    ):
+                        right -= 1
+
+    return res
