@@ -1505,3 +1505,48 @@ def four_sum_optimal(nums, target):
                         right -= 1
 
     return res
+
+
+#-----------------------------------------------------------------------------------------------------------------------------------------------------------
+#-----------------------------------------------------------------------------------------------------------------------------------------------------------
+##Q28 Number of Subarrays with xor K | Brute - Better - Optimal
+
+## Brute
+def subarray_xor_brute(nums, target):
+    n = len(nums)
+    count = 0
+
+    for i in range(n):
+        for j in range(i, n):
+            xor = 0
+            for k in range(i, j+1):
+                xor ^= nums[k]
+            if xor == target:
+                count+=1
+    return count
+
+## Better
+def subarray_xor_better(nums, target):
+    n = len(nums)
+    count = 0
+
+    for i in range(n):
+        xor = 0
+        for j in range(i, n):
+            xor ^= nums[j]
+            if xor == target:
+                count+=1
+    return count
+
+
+## Optimal
+def subarray_xor_optimal(nums, k):
+    xor = 0
+    count = 0
+    mp = {0:1}
+
+    for num in nums:
+      xor ^=num
+      count += mp.get(xor^k, 0)
+      mp[xor] = mp.get(xor, 0)+1
+    return count
