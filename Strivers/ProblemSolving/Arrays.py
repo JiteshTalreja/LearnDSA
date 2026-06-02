@@ -1550,3 +1550,48 @@ def subarray_xor_optimal(nums, k):
       count += mp.get(xor^k, 0)
       mp[xor] = mp.get(xor, 0)+1
     return count
+
+#-----------------------------------------------------------------------------------------------------------------------------------------------------------
+#-----------------------------------------------------------------------------------------------------------------------------------------------------------
+##Q29 Merge Overlapping Intervals | Brute, Optimal with Precise TC analysis
+
+## Brute
+def merge_overlapping_brute(nums):
+    res = []
+    nums.sort()
+    n = len(nums)
+
+    for i in range(n):
+        start = nums[i][0]
+        end = nums[i][1]
+
+        if res and end<=res[-1][1]:
+            continue
+
+        for j in range(i+1, n):
+            if nums[j][0] <=end:
+                end = max(nums[j][1], end)
+
+            else:
+                break
+
+        res.append([start, end])
+    return res
+
+print("merge overlap intervals Brute: ", merge_overlapping_brute([[1,3],[2,6],[8,10],[15,18]]))
+
+## Optimal
+def merge_overlapping_optimal(nums):
+    nums.sort()
+    res = []
+    n = len(nums)
+
+    for i in range(n):
+        if not res or nums[i][0]>res[-1][1]:
+            res.append(nums[i])
+        else:
+            res[-1][1] = max(res[-1][1], nums[i][1])
+
+    return res
+
+print("merge overlap intervals opt: ", merge_overlapping_optimal([[1,3],[2,6],[8,10],[15,18]]))
