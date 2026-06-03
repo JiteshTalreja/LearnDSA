@@ -1644,3 +1644,54 @@ def merge_sorted_opt1(nums1, nums2):
     nums2.sort()
     return nums1, nums2
 print("merge_sorted opt1 :", merge_sorted_opt1([1,3,5,7,9], [0,2,4,6,8]))
+
+## Optimal 2
+def next_gap(gap):
+
+    if gap <= 1:
+        return 0
+
+    return (gap // 2) + (gap % 2)
+def merge_sorted_opt2(nums1, nums2):
+
+    n = len(nums1)
+    m = len(nums2)
+
+    gap = next_gap(n + m)
+
+    while gap > 0:
+
+        left = 0
+        right = left + gap
+
+        while right < n + m:
+
+            # both pointers in nums1
+            if left < n and right < n:
+
+                if nums1[left] > nums1[right]:
+                    nums1[left], nums1[right] = \
+                    nums1[right], nums1[left]
+
+            # left in nums1, right in nums2
+            elif left < n and right >= n:
+
+                if nums1[left] > nums2[right - n]:
+                    nums1[left], nums2[right - n] = \
+                    nums2[right - n], nums1[left]
+
+            # both pointers in nums2
+            else:
+
+                if nums2[left - n] > nums2[right - n]:
+                    nums2[left - n], nums2[right - n] = \
+                    nums2[right - n], nums2[left - n]
+
+            left += 1
+            right += 1
+
+        gap = next_gap(gap)
+
+    return nums1, nums2
+
+print("merge_sorted opt2 :", merge_sorted_opt2([1,3,5,7,9], [0,2,4,6,8]))
