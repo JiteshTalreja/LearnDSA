@@ -1595,3 +1595,52 @@ def merge_overlapping_optimal(nums):
     return res
 
 print("merge overlap intervals opt: ", merge_overlapping_optimal([[1,3],[2,6],[8,10],[15,18]]))
+
+#-----------------------------------------------------------------------------------------------------------------------------------------------------------
+#-----------------------------------------------------------------------------------------------------------------------------------------------------------
+##Q29 Merge Sorted Arrays Without Extra Space | 2 Optimal Solution
+
+## Brute (using extra space)
+def merge_sorted_brute(nums1, nums2):
+    n = len(nums1)
+    m = len(nums2)
+    res = []
+    i, j = 0, 0
+
+    while i<n and j <m:
+        if nums1[i] <= nums2[j]:
+            res.append(nums1[i])
+            i+=1
+        else:
+            res.append(nums2[j])
+            j+=1
+    while i < n:
+        res.append(nums1[i])
+        i+=1
+    while j < m:
+        res.append(nums2[j])
+        j+=1
+    for i in range(len(res)):
+        if i < n:
+            nums1[i] = res[i]
+        else:
+            nums2[i-n] = res[i]
+    return nums1, nums2
+
+print("merge_sorted brute:", merge_sorted_brute([1,3,5,7,9], [0,2,4,6,8]))
+
+## Optimal 1
+def merge_sorted_opt1(nums1, nums2):
+    left = len(nums1)-1
+    right = 0
+    while left>=0 and right< len(nums2):
+        if nums1[left] > nums2[right]:
+            nums1[left], nums2[right] = nums2[right], nums1[left]
+            left-=1
+            right+=1
+        else:
+            break
+    nums1.sort()
+    nums2.sort()
+    return nums1, nums2
+print("merge_sorted opt1 :", merge_sorted_opt1([1,3,5,7,9], [0,2,4,6,8]))
