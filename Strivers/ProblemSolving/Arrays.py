@@ -1752,3 +1752,57 @@ def missing_and_repeating_opt(nums):
     y = x-val1
     return int(x), int(y)
 print('missing/repeating opt:', missing_and_repeating_opt([4,6,3,2,1,1]))
+
+## Optimal (XOR/Bit Manipulation)
+def missing_and_repeating_xor(nums):
+
+    n = len(nums)
+
+    xor = 0
+
+    # XOR array
+    for num in nums:
+        xor ^= num
+
+    # XOR 1..n
+    for i in range(1, n + 1):
+        xor ^= i
+
+    # rightmost set bit
+    bit = xor & -xor
+
+    bucket1 = 0
+    bucket2 = 0
+
+    # partition array
+    for num in nums:
+
+        if num & bit:
+            bucket1 ^= num
+        else:
+            bucket2 ^= num
+
+    # partition 1..n
+    for i in range(1, n + 1):
+
+        if i & bit:
+            bucket1 ^= i
+        else:
+            bucket2 ^= i
+
+    # determine which is repeating
+    count = 0
+
+    for num in nums:
+        if num == bucket1:
+            count += 1
+
+    if count == 2:
+        repeating = bucket1
+        missing = bucket2
+    else:
+        repeating = bucket2
+        missing = bucket1
+
+    return repeating, missing
+print('missing/repeating xor:', missing_and_repeating_xor([4,6,3,2,1,1]))
