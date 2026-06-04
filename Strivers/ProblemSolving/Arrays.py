@@ -1695,3 +1695,60 @@ def merge_sorted_opt2(nums1, nums2):
     return nums1, nums2
 
 print("merge_sorted opt2 :", merge_sorted_opt2([1,3,5,7,9], [0,2,4,6,8]))
+
+#-----------------------------------------------------------------------------------------------------------------------------------------------------------
+#-----------------------------------------------------------------------------------------------------------------------------------------------------------
+##Q30 Find the Missing and Repeating Number | 4 Approaches
+
+## Brute
+def missing_and_repeating_brute(nums):
+    n = len(nums)
+    repeating, missing = -1,-1
+    for i in range(1,n+1):
+        count = 0
+        for j in nums:
+            if j == i:
+                count+=1
+        if count==2:
+            repeating = i
+        elif count == 0:
+            missing = i
+    return repeating, missing
+
+print('missing/repeating brute:', missing_and_repeating_brute([4,6,3,2,1,1]))
+
+
+## Better
+def missing_and_repeating_better(nums):
+    n = len(nums)
+    hashmap = [0]*(n+1)
+    repeating, missing = -1,-1
+    for i in nums:
+        hashmap[i]+=1
+
+    for j in range(1,len(hashmap)):
+        if hashmap[j] == 2:
+            repeating = j
+        elif hashmap[j] ==0:
+            missing = j
+    return repeating, missing
+print('missing/repeating better:', missing_and_repeating_better([4,6,3,2,1,1]))
+
+## Optimal (sum of n natural numbers)
+def missing_and_repeating_opt(nums):
+    n = len(nums)
+    SN = (n*(n+1))/2
+    SN2 = (n*(n+1)*(2*n+1))/6
+    S, S2 = 0, 0
+    # x - y = S - SN
+    # x2 - y2 = S2 - SN2
+
+    for i in range(n):
+        S += nums[i]
+        S2 += nums[i]*nums[i]
+    val1 = S - SN
+    val2 = (S2 - SN2)/val1
+    x = (val1 + val2)/2
+    y = x-val1
+    return int(x), int(y)
+print('missing/repeating opt:', missing_and_repeating_opt([4,6,3,2,1,1]))
