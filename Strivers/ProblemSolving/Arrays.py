@@ -1806,3 +1806,18 @@ def missing_and_repeating_xor(nums):
 
     return repeating, missing
 print('missing/repeating xor:', missing_and_repeating_xor([4,6,3,2,1,1]))
+
+#-----------------------------------------------------------------------------------------------------------------------------------------------------------
+#-----------------------------------------------------------------------------------------------------------------------------------------------------------
+##Q31 Count Inversions in an Array | Brute and Optimal
+
+## Brute
+def count_inversion_brute(nums):
+    count = 0
+    n = len(nums)
+
+    for i in range(0, n-1):
+        for j in range(i+1, n):
+            if nums[i] > nums[j]:
+                count+=1
+    return count
