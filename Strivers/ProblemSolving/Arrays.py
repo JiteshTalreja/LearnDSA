@@ -1821,3 +1821,73 @@ def count_inversion_brute(nums):
             if nums[i] > nums[j]:
                 count+=1
     return count
+
+#-----------------------------------------------------------------------------------------------------------------------------------------------------------
+#-----------------------------------------------------------------------------------------------------------------------------------------------------------
+##Q33 Maximum Product Subarray - Best Intuitive Approach Discussed
+
+## Brute
+def max_product_brute(nums):
+
+    n = len(nums)
+
+    maxi = float('-inf')
+
+    for i in range(n):
+
+        for j in range(i, n):
+
+            product = 1
+
+            for k in range(i, j + 1):
+
+                product *= nums[k]
+
+            maxi = max(maxi, product)
+
+    return maxi
+
+##Better
+def max_product_better(nums):
+
+    n = len(nums)
+
+    maxi = float('-inf')
+
+    for i in range(n):
+
+        product = 1
+
+        for j in range(i, n):
+
+            product *= nums[j]
+
+            maxi = max(maxi, product)
+
+    return maxi
+
+##Optimal
+def max_product_optimal(nums):
+
+    n = len(nums)
+
+    prefix = 1
+    suffix = 1
+
+    ans = float('-inf')
+
+    for i in range(n):
+
+        if prefix == 0:
+            prefix = 1
+
+        if suffix == 0:
+            suffix = 1
+
+        prefix *= nums[i]
+
+        suffix *= nums[n - i - 1]
+
+        ans = max(ans, prefix, suffix)
+
+    return ans
