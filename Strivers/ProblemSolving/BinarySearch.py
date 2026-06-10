@@ -263,3 +263,78 @@ def bs_recursive(nums, target, left = 0, right = None):
         return bs_recursive(nums, target, left, mid-1)
     else:
         return bs_recursive(nums, target, mid+1, right)
+
+
+#-----------------------------------------------------------------------------------------------------------------------------------------------------------
+#-----------------------------------------------------------------------------------------------------------------------------------------------------------
+##Q1 Implement Lower Bound and Upper Bound | Search Insert Position | Floor and Ceil
+# Lower Bound: lowest index i such that nums[i]>= target
+
+## [1,2,3,3,5,8,8,10,10,11]
+#recursion
+def lower_bound_rec(nums, target):
+
+    def helper(left, right, ans):
+        if left > right:
+            return ans
+
+        mid = left + (right-left)//2
+
+        if nums[mid]>=target:
+            ans = mid
+            return helper(left, mid-1, ans)
+        else:
+            return helper(mid+1, right,ans)
+
+    return helper(0, len(nums)-1, len(nums))
+print('lower bound rec: ', lower_bound_rec([1,2,3,3,5,8,8,10,10,11], 4))
+
+#for loop
+
+def lower_bound_loop(nums, target):
+    ans = len(nums)
+    left = 0; right = len(nums)-1
+
+    while left <= right:
+        mid = left + (right - left)//2
+
+        if nums[mid]>=target:
+            ans = mid
+            right = mid - 1
+        else:
+            left = mid+1
+    return ans
+print('lower bound loop: ', lower_bound_loop([1,2,3,3,5,8,8,10,10,11], 4))
+
+# Upper Bound: lowest index i such that nums[i]> target
+
+def upper_bound_rec(nums, target):
+    def helper(left, right, ans):
+        if left > right:
+            return ans
+
+        mid = left + (right-left)//2
+
+        if nums[mid]>target:
+            ans = mid
+            return helper(left, mid-1, ans)
+        else:
+            return helper(mid+1, right, ans)
+
+    return helper(0,len(nums)-1, len(nums))
+print('Upper bound rec: ', upper_bound_rec([1,2,3,3,4,5,8,8,10,10,11], 4))
+
+def upper_bound_loop(nums, target):
+    ans = len(nums)
+    left = 0; right =len(nums)-1
+
+    while left <= right:
+        mid = left + (right - left)//2
+
+        if nums[mid] > target:
+            ans = mid
+            right = mid-1
+        else:
+            left = mid+1
+    return ans
+print('Upper bound rec: ', upper_bound_loop([1,2,3,3,4,5,8,8,10,10,11], 4))
