@@ -244,6 +244,8 @@ THE SMELL TEST — ask yourself these 3 questions:
 --------------------------------------------------------------------------------
 
 """
+from annotationlib import annotations_to_string
+
 
 ## Binary search using Recursion
 
@@ -338,3 +340,45 @@ def upper_bound_loop(nums, target):
             left = mid+1
     return ans
 print('Upper bound rec: ', upper_bound_loop([1,2,3,3,4,5,8,8,10,10,11], 4))
+
+# -----------------------------------------------------------------------------------------------------------------------------------------------------------
+# -----------------------------------------------------------------------------------------------------------------------------------------------------------
+##Q2 Search Insert Position | given an array nums and a target value you are to find the exact index of the target value in nums, if target not in nums find
+# index where it should be present
+
+## same as lowe bound
+
+# -----------------------------------------------------------------------------------------------------------------------------------------------------------
+# -----------------------------------------------------------------------------------------------------------------------------------------------------------
+##Q3 Floor and Ceil
+## floor = largest number in array <= target ----> can be done using lower-bound
+## ceil = smallest number in array >= target ----> lower bound
+
+
+def floor_value(nums, target):
+    ans = -1
+
+    left, right = 0, len(nums) - 1
+
+    while left <= right:
+        mid = left + (right - left) // 2
+
+        if nums[mid] <= target:
+            ans = nums[mid]      # possible floor
+            left = mid + 1       # try finding a larger valid value
+        else:
+            right = mid - 1
+
+    return ans
+
+def floor_value_rec(nums, target):
+    def helper(left, right, ans):
+        if left > right:
+            return ans
+        mid = left +(right-left)//2
+
+        if nums[mid]<=target:
+            return helper(mid+1, right, mid)
+        else:
+            return helper(left, mid-1, ans)
+    return helper(0, len(nums)-1, -1)
