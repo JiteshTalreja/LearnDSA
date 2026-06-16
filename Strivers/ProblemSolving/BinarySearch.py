@@ -431,3 +431,5 @@ def first_last_ublb(nums, target):
     return first, last
 
 print('first and last occurrence: ', first_last_ublb([2,4,6,8,8,8,11,13], 8))
+
+## using binary search (first search for first and then for last)
