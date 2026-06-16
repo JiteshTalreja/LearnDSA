@@ -382,3 +382,52 @@ def floor_value_rec(nums, target):
         else:
             return helper(left, mid-1, ans)
     return helper(0, len(nums)-1, -1)
+
+# -----------------------------------------------------------------------------------------------------------------------------------------------------------
+# -----------------------------------------------------------------------------------------------------------------------------------------------------------
+##Q4 BS-3. First and Last Occurrences in Array | Count occurrences in Array
+
+## Brute
+def first_last(nums, target):
+    first = -1 ; last = -1
+
+    for i, v in enumerate(nums):
+        if v == target:
+            if first ==-1:
+                first = i
+            last = i
+    return first, last
+
+print('first and last occurrence: ', first_last([2,4,6,8,8,8,11,13], 8))
+
+## using lower bound upper bound
+
+def first_last_ublb(nums, target):
+    def lower_bound(left, right, ans):
+        if left > right:
+            return ans
+
+        mid = left + (right-left)//2
+
+        if nums[mid]>=target:
+            ans = mid
+            return lower_bound(left, mid-1, ans)
+        else:
+            return lower_bound(mid+1, right, ans)
+
+    def upper_bound(left, right, ans):
+        if left>right:
+            return ans
+        mid = left + (right-left)//2
+
+        if nums[mid]>target:
+            ans = mid
+            return upper_bound(left, mid-1, ans)
+        else:
+            return upper_bound(mid+1, right, ans)
+
+    first = lower_bound(0, len(nums)-1, len(nums))
+    last = upper_bound(0, len(nums)-1, len(nums))-1
+    return first, last
+
+print('first and last occurrence: ', first_last_ublb([2,4,6,8,8,8,11,13], 8))
