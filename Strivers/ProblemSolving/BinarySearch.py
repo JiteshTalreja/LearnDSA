@@ -433,3 +433,35 @@ def first_last_ublb(nums, target):
 print('first and last occurrence: ', first_last_ublb([2,4,6,8,8,8,11,13], 8))
 
 ## using binary search (first search for first and then for last)
+## helpers
+def find_left(nums, target):
+    left = 0; right = len(nums)-1
+    ans = -1
+    while left <= right:
+        mid = left + (right-left)//2
+        if nums[mid] == target:
+            ans = mid
+            right = mid-1
+        elif nums[mid] < target:
+            left = mid+1
+        else:
+            right = mid-1
+    return ans
+def find_right(nums, target):
+    left = 0; right = len(nums)-1
+    ans = -1
+    while left <= right:
+        mid = left + (right - left)//2
+        if nums[mid] == target:
+            ans = mid
+            left = mid+1
+        elif nums[mid] < target:
+            left = mid+1
+        else:
+            right = mid-1
+    return ans
+
+def first_last_bs(nums, target):
+    return find_left(nums, target), find_right(nums, target)
+
+print('first and last occurrence BS: ', first_last_bs([2, 4, 6, 8, 8, 8, 11, 13], 8))
