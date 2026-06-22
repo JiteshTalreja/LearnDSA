@@ -527,4 +527,31 @@ def search_dup_rot_array(nums, target):
 # -----------------------------------------------------------------------------------------------------------------------------------------------------------
 # -----------------------------------------------------------------------------------------------------------------------------------------------------------
 ##Q7 BS-6. Minimum in Rotated Sorted Array
+def find_min(nums):
+    left = 0
+    right = len(nums) - 1
 
+    ans = float('inf')
+
+    while left <= right:
+
+        # Entire search space is sorted
+        if nums[left] <= nums[right]:
+            ans = min(ans, nums[left])
+            break
+
+        mid = left + (right - left) // 2
+
+        # Left half is sorted
+        if nums[left] <= nums[mid]:
+
+            ans = min(ans, nums[left])
+            left = mid + 1
+
+        # Right half is sorted
+        else:
+
+            ans = min(ans, nums[mid])
+            right = mid - 1
+
+    return ans
