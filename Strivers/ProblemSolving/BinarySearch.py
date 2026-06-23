@@ -497,7 +497,6 @@ print("search in rotate sorted array: ", search_rot_array([7,8,9,1,2,3,4,5,6], 1
 # -----------------------------------------------------------------------------------------------------------------------------------------------------------
 # -----------------------------------------------------------------------------------------------------------------------------------------------------------
 ##Q6 BS-5. Search Element in Rotated Sorted Array II (can have duplicates)
-
 def search_dup_rot_array(nums, target):
     left = 0; right = len(nums)-1
 
@@ -555,3 +554,38 @@ def find_min(nums):
             right = mid - 1
 
     return ans
+
+# -----------------------------------------------------------------------------------------------------------------------------------------------------------
+# -----------------------------------------------------------------------------------------------------------------------------------------------------------
+##Q8 BS-7. Find out how many times array has been rotated
+def count_rotations_optimal(nums):
+
+    left = 0
+    right = len(nums) - 1
+
+    mini = float('inf')
+    index = -1
+
+    while left <= right:
+
+        mid = left + (right - left) // 2
+
+        # Left half sorted
+        if nums[left] <= nums[mid]:
+
+            if nums[left] < mini:
+                mini = nums[left]
+                index = left
+
+            left = mid + 1
+
+        # Right half sorted
+        else:
+
+            if nums[mid] < mini:
+                mini = nums[mid]
+                index = mid
+
+            right = mid - 1
+
+    return index
