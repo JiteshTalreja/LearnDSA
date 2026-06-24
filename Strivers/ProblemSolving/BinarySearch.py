@@ -589,3 +589,42 @@ def count_rotations_optimal(nums):
             right = mid - 1
 
     return index
+
+# -----------------------------------------------------------------------------------------------------------------------------------------------------------
+# -----------------------------------------------------------------------------------------------------------------------------------------------------------
+##Q9 BS-8. Single Element in Sorted Array
+
+## I/P = [1,1,2,2,3,3,4,5,5,6,6]; O/P = 4
+def single_ele(nums):
+
+    n = len(nums)
+
+    if n == 1:
+        return nums[0]
+    if nums[0] != nums[1]:
+        return nums[0]
+    if nums[n-1] != nums[n-2]:
+        return nums[n-1]
+    left = 1
+    right = n - 2
+
+    while left <= right:
+
+        mid = left + (right - left) // 2
+
+        if nums[mid] != nums[mid-1] and nums[mid] != nums[mid+1]:
+            return nums[mid]
+
+        # pair starts at even index
+        if (mid % 2 == 0 and nums[mid] == nums[mid+1]) or \
+           (mid % 2 == 1 and nums[mid] == nums[mid-1]):
+
+            left = mid + 1
+
+        else:
+
+            right = mid - 1
+
+    return -1
+
+print("single element: ", single_ele([1,1,2,2,3,3,4,5,5,6,6,]))
