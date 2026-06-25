@@ -626,5 +626,17 @@ def single_ele(nums):
             right = mid - 1
 
     return -1
-
 print("single element: ", single_ele([1,1,2,2,3,3,4,5,5,6,6,]))
+
+# -----------------------------------------------------------------------------------------------------------------------------------------------------------
+# -----------------------------------------------------------------------------------------------------------------------------------------------------------
+##Q10 BS-9. Find Peak Element : Peak --> i is peak in nums is nums[i-1]< nums[i] > nums[i+1]
+
+## Brute
+def peak(nums):
+    for i, v in enumerate(nums):
+        if (i==0 or nums[i-1]<nums[i]) and (i==len(nums)-1 or nums[i]>nums[i+1]):
+            return nums[i]
+    return -1
+
+print("peak: ", peak([1,2,3,4,5,6,7,8,5,1]))
