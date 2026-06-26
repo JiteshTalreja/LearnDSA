@@ -640,3 +640,17 @@ def peak(nums):
     return -1
 
 print("peak: ", peak([1,2,3,4,5,6,7,8,5,1]))
+
+## optimal (Binary search)
+def peak_bs(nums):
+    left = 0; right = len(nums)-1
+    while left<right:
+        mid = left+(right-left)//2
+        ## increasing curve
+        if nums[mid]<nums[mid+1]:
+            left = mid+1
+        else:
+            right = mid
+    return nums[left]
+
+print("peak: ", peak_bs([9,8,7,6,5,4,3,2,1]))
