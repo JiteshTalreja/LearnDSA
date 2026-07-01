@@ -688,3 +688,29 @@ def bs_n_root(num, n):
     return -1
 
 print("nth root:", bs_n_root(81, 2))
+
+# -----------------------------------------------------------------------------------------------------------------------------------------------------------
+# -----------------------------------------------------------------------------------------------------------------------------------------------------------
+##Q13 BS-12. Koko Eating Bananas
+
+def is_possible(nums, k, hours):
+    tot_hours = 0
+    for pile in nums:
+        tot_hours += (pile + k - 1) // k
+    if tot_hours<=hours:
+        return True
+    return False
+
+def koko_bananas_rec(nums, hours):
+
+    def helper(left, right, ans):
+        if left>right:
+            return ans
+        mid = left +(right-left)//2
+
+        if is_possible(nums, mid, hours):
+            ans = mid
+            return helper(left, mid-1, ans)
+        else:
+            return helper(mid+1, right, ans)
+    return helper(1,max(nums), -1)
