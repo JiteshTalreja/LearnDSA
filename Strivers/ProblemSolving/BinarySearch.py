@@ -714,3 +714,41 @@ def koko_bananas_rec(nums, hours):
         else:
             return helper(mid+1, right, ans)
     return helper(1,max(nums), -1)
+
+# -----------------------------------------------------------------------------------------------------------------------------------------------------------
+# -----------------------------------------------------------------------------------------------------------------------------------------------------------
+##Q14 BS-13. Minimum days to make M bouquets | Binary Search
+
+def min_days(nums, m, k):
+
+    if m*k>len(nums):
+        return -1
+
+    def is_possible_day(day):
+        flower=0
+        bouquets = 0
+        for bloom in nums:
+            if bloom<=day:
+                flower +=1
+
+                if flower==k:
+                    bouquets+=1
+                    flower =0
+            else:
+                flower = 0
+        return bouquets>=m
+
+    left = min(nums)
+    right = max(nums)
+
+    ans = -1
+
+    while left<=right:
+        mid = left+(right-left)//2
+
+        if is_possible_day(mid):
+            ans = mid
+            right = mid-1
+        else:
+            left = mid+1
+    return ans
