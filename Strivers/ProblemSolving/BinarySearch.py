@@ -718,7 +718,6 @@ def koko_bananas_rec(nums, hours):
 # -----------------------------------------------------------------------------------------------------------------------------------------------------------
 # -----------------------------------------------------------------------------------------------------------------------------------------------------------
 ##Q14 BS-13. Minimum days to make M bouquets | Binary Search
-
 def min_days(nums, m, k):
 
     if m*k>len(nums):
@@ -751,4 +750,34 @@ def min_days(nums, m, k):
             right = mid-1
         else:
             left = mid+1
+    return ans
+
+# -----------------------------------------------------------------------------------------------------------------------------------------------------------
+# -----------------------------------------------------------------------------------------------------------------------------------------------------------
+##Q15 BS-14. Find the Smallest Divisor Given a Threshold | Binary Search
+def smallest_divisor(nums, threshold):
+
+    def is_possible_div(divisor):
+        total = 0
+        for num in nums:
+            total += (num + divisor - 1) // divisor
+        return total <= threshold
+
+    left = 1
+    right = max(nums)
+    ans = -1
+
+    while left <= right:
+
+        mid = left + (right - left) // 2
+
+        if is_possible_div(mid):
+
+            ans = mid
+            right = mid - 1
+
+        else:
+
+            left = mid + 1
+
     return ans
