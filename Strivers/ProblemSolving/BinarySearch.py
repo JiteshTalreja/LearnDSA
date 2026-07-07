@@ -781,3 +781,31 @@ def smallest_divisor(nums, threshold):
             left = mid + 1
 
     return ans
+
+# -----------------------------------------------------------------------------------------------------------------------------------------------------------
+# -----------------------------------------------------------------------------------------------------------------------------------------------------------
+##Q16 BS-15. Capacity to Ship Packages within D Days
+def ship_capacity(weights, days):
+    def is_possible_cap(cap):
+        tot_weight = 0
+        days_used = 1
+        for weight in weights:
+            if tot_weight+weight<=cap:
+                tot_weight+=weight
+            else:
+                days_used +=1
+                tot_weight = weight
+        return days_used<=days
+
+    left = max(weights); right = sum(weights); ans = -1
+
+    while left<=right:
+        capacity = left+(right-left)//2
+        if is_possible_cap(capacity):
+            ans = capacity
+            right = capacity -1
+        else:
+            left = capacity +1
+    return ans
+
+print("ship capacity:", ship_capacity(weights = [3,2,2,4,1,4], days = 3))
