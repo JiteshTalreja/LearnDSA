@@ -809,3 +809,21 @@ def ship_capacity(weights, days):
     return ans
 
 print("ship capacity:", ship_capacity(weights = [3,2,2,4,1,4], days = 3))
+
+# -----------------------------------------------------------------------------------------------------------------------------------------------------------
+# -----------------------------------------------------------------------------------------------------------------------------------------------------------
+##Q17 BS-16. Kth Missing Positive Number | Maths + Binary Search
+def missing_positive(nums, k):
+    left = 0
+    right = len(nums)-1
+
+    while left<=right:
+        mid = left + (right-left)//2
+        missing = nums[mid] - (mid+1)
+        if missing<k:
+            left = mid+1
+        else:
+            right= mid-1
+    return left+k
+
+print("missing positive: ", missing_positive([2,3,4,7,11], 5))
