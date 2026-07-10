@@ -693,7 +693,7 @@ print("nth root:", bs_n_root(81, 2))
 # -----------------------------------------------------------------------------------------------------------------------------------------------------------
 ##Q13 BS-12. Koko Eating Bananas
 
-def is_possible(nums, k, hours):
+def is_possibli(nums, k, hours):
     tot_hours = 0
     for pile in nums:
         tot_hours += (pile + k - 1) // k
@@ -708,7 +708,7 @@ def koko_bananas_rec(nums, hours):
             return ans
         mid = left +(right-left)//2
 
-        if is_possible(nums, mid, hours):
+        if is_possibli(nums, mid, hours):
             ans = mid
             return helper(left, mid-1, ans)
         else:
@@ -827,3 +827,31 @@ def missing_positive(nums, k):
     return left+k
 
 print("missing positive: ", missing_positive([2,3,4,7,11], 5))
+
+# -----------------------------------------------------------------------------------------------------------------------------------------------------------
+# -----------------------------------------------------------------------------------------------------------------------------------------------------------
+##Q18 BS-17. Aggressive Cows | Binary Search Hard
+
+def agg_cows(stalls, cows):
+    stalls.sort()
+
+    def is_possible(distance):
+        last = stalls[0]
+        count = 1
+        for i in range(1,len(stalls)):
+            if stalls[i] - last >= distance:
+                count+=1
+                last = stalls[i]
+        return count>=cows
+    left = 1; right = max(stalls) - min(stalls)
+    ans = -1
+    while left <= right:
+        mid = left + (right - left)//2
+
+        if is_possible(mid):
+            ans = mid
+            left = mid+1
+        else:
+            right = mid-1
+    return ans
+print("agg cows: ", agg_cows([1,2,3,4,7], 3))
