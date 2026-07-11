@@ -855,3 +855,33 @@ def agg_cows(stalls, cows):
             right = mid-1
     return ans
 print("agg cows: ", agg_cows([1,2,3,4,7], 3))
+
+
+# -----------------------------------------------------------------------------------------------------------------------------------------------------------
+# -----------------------------------------------------------------------------------------------------------------------------------------------------------
+##Q19 BS-18 Allocate Books or Book Allocation | Hard Binary Search
+def allocate_books(books, students):
+    if students > len(books):
+        return -1
+    def is_possible(max_pages):
+        stud = 1; current_pages= 0
+
+        for i in books:
+            if current_pages+i <= max_pages:
+                current_pages+=i
+            else:
+                stud +=1
+                current_pages = i
+        return stud<=students
+    
+    left = max(books); right = sum(books); ans = -1
+    while left <= right:
+        mid = left + (right-left)//2
+        if is_possible(mid):
+            ans = mid
+            right = mid-1
+        else:
+            left= mid+1
+    return ans
+
+print("allocate books; ", allocate_books([25,46, 28, 49, 24], 4))
