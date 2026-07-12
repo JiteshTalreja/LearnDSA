@@ -885,3 +885,48 @@ def allocate_books(books, students):
     return ans
 
 print("allocate books; ", allocate_books([25,46, 28, 49, 24], 4))
+
+
+# -----------------------------------------------------------------------------------------------------------------------------------------------------------
+# -----------------------------------------------------------------------------------------------------------------------------------------------------------
+##20 BS 19. Painter's Partition and Split Array - Largest Sum
+def painters_partition(boards, k):
+
+    if k > len(boards):
+        return -1
+
+    def is_possible(max_length):
+
+        painters = 1
+        current = 0
+
+        for board in boards:
+
+            if current + board <= max_length:
+                current += board
+
+            else:
+                painters += 1
+                current = board
+
+        return painters <= k
+
+    left = max(boards)
+    right = sum(boards)
+
+    ans = -1
+
+    while left <= right:
+
+        mid = left + (right - left) // 2
+
+        if is_possible(mid):
+
+            ans = mid
+            right = mid - 1
+
+        else:
+
+            left = mid + 1
+
+    return ans
