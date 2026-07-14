@@ -56,3 +56,7 @@ local_settings.py
 
 # Ignore compiled C extensions
 *.so
+
+# GitHub and Git hooks
+.github/
+.githooks/
