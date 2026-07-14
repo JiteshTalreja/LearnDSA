@@ -930,3 +930,42 @@ def painters_partition(boards, k):
             left = mid + 1
 
     return ans
+
+# -----------------------------------------------------------------------------------------------------------------------------------------------------------
+# -----------------------------------------------------------------------------------------------------------------------------------------------------------
+##21 BS 21: Median of two Sorted Arrays of Different Sizes | Brute and Better Approach
+def median_sorted_arrays(nums1, nums2):
+    n1 = len(nums1)
+    n2 = len(nums2)
+
+    if n1 > n2:
+        return median_sorted_arrays(nums2, nums1)
+
+    left = 0
+    right = n1
+
+    while left <= right:
+
+        cut1 = (left + right) // 2
+        cut2 = (n1 + n2 + 1) // 2 - cut1
+
+        l1 = float('-inf') if cut1 == 0 else nums1[cut1 - 1]
+        l2 = float('-inf') if cut2 == 0 else nums2[cut2 - 1]
+
+        r1 = float('inf') if cut1 == n1 else nums1[cut1]
+        r2 = float('inf') if cut2 == n2 else nums2[cut2]
+
+        if l1 <= r2 and l2 <= r1:
+
+            if (n1 + n2) % 2:
+                return max(l1, l2)
+
+            return (max(l1, l2) + min(r1, r2)) / 2
+
+        elif l1 > r2:
+            right = cut1 - 1
+
+        else:
+            left = cut1 + 1
+
+print("median: ", median_sorted_arrays([1,3,4,7,10,12], [2,3,6,16]))
