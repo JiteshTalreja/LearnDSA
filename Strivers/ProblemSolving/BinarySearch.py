@@ -969,3 +969,34 @@ def median_sorted_arrays(nums1, nums2):
             left = cut1 + 1
 
 print("median: ", median_sorted_arrays([1,3,4,7,10,12], [2,3,6,16]))
+
+
+# -----------------------------------------------------------------------------------------------------------------------------------------------------------
+# -----------------------------------------------------------------------------------------------------------------------------------------------------------
+##22 BS 23. Row with maximum number of 1s | Binary Search on 2D Arrays
+def max_1(mat):
+    rows = len(mat)
+    cols = len(mat[0])
+    max_count = 0
+    ans = -1
+    for r in range(rows):
+
+        left = 0; right = cols
+        while left < right:
+            mid = left + (right-left)//2
+            if mat[r][mid]>=1:
+                right = mid
+            else:
+                left= mid+1
+        count = cols - left
+        if count>max_count:
+            max_count=count
+            ans = r
+    return ans
+
+print("max1: ", max_1(mat = [
+    [0, 0, 0, 1, 1],
+    [0, 1, 1, 1, 1],
+    [0, 0, 1, 1, 1],
+    [0, 0, 0, 0, 1]
+]))
