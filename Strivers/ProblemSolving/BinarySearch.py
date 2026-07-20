@@ -1000,3 +1000,34 @@ print("max1: ", max_1(mat = [
     [0, 0, 1, 1, 1],
     [0, 0, 0, 0, 1]
 ]))
+
+# -----------------------------------------------------------------------------------------------------------------------------------------------------------
+# -----------------------------------------------------------------------------------------------------------------------------------------------------------
+##23 BS-24. Search in a 2D Matrix - I | Binary Search of 2D
+def search_matrix(matrix, target):
+
+    rows = len(matrix)
+    cols = len(matrix[0])
+
+    left = 0
+    right = rows * cols - 1
+
+    while left <= right:
+
+        mid = left + (right - left) // 2
+
+        row = mid // cols
+        col = mid % cols
+
+        value = matrix[row][col]
+
+        if value == target:
+            return True
+
+        elif value < target:
+            left = mid + 1
+
+        else:
+            right = mid - 1
+
+    return False
