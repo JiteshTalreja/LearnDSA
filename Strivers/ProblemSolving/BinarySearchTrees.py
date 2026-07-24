@@ -355,3 +355,118 @@ the recursion writes itself.
 
 ============================================================
 """
+
+from collections import deque
+
+
+class TreeNode:
+    def __init__(self, val):
+        self.val = val
+        self.left = None
+        self.right = None
+
+
+#######################################################
+# PREORDER (Root -> Left -> Right)
+#######################################################
+
+def preorder(root):
+    if root is None:
+        return
+
+    print(root.val, end=" ")
+
+    preorder(root.left)
+    preorder(root.right)
+
+
+#######################################################
+# INORDER (Left -> Root -> Right)
+#######################################################
+
+def inorder(root):
+    if root is None:
+        return
+
+    inorder(root.left)
+
+    print(root.val, end=" ")
+
+    inorder(root.right)
+
+
+#######################################################
+# POSTORDER (Left -> Right -> Root)
+#######################################################
+
+def postorder(root):
+    if root is None:
+        return
+
+    postorder(root.left)
+
+    postorder(root.right)
+
+    print(root.val, end=" ")
+
+
+#######################################################
+# LEVEL ORDER (BFS)
+#######################################################
+
+def level_order(root):
+    if root is None:
+        return
+
+    queue = deque([root])
+
+    while queue:
+
+        node = queue.popleft()
+
+        print(node.val, end=" ")
+
+        if node.left:
+            queue.append(node.left)
+
+        if node.right:
+            queue.append(node.right)
+
+
+#######################################################
+# Example Tree
+#######################################################
+
+#         1
+#       /   \
+#      2     3
+#     / \   / \
+#    4  5  6  7
+
+root = TreeNode(1)
+
+root.left = TreeNode(2)
+root.right = TreeNode(3)
+
+root.left.left = TreeNode(4)
+root.left.right = TreeNode(5)
+
+root.right.left = TreeNode(6)
+root.right.right = TreeNode(7)
+
+
+#######################################################
+# Driver
+#######################################################
+
+print("Preorder :", end=" ")
+preorder(root)
+
+print("\nInorder  :", end=" ")
+inorder(root)
+
+print("\nPostorder:", end=" ")
+postorder(root)
+
+print("\nLevelOrder:", end=" ")
+level_order(root)
