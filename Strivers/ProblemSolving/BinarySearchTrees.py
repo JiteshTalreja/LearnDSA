@@ -379,6 +379,23 @@ def preorder(root):
     preorder(root.left)
     preorder(root.right)
 
+#######################################################
+# ITERATIVE PREORDER (Root -> Left -> Right)
+#######################################################
+
+def iterative_preorder(root):
+    if root is None:
+        return 
+    stack = [root]
+
+    while stack:
+        node = stack.pop()
+        print(node.val, end=" ")
+        if node.right:
+            stack.append(node.right)
+        if node.left:
+            stack.append(node.left)
+        
 
 #######################################################
 # INORDER (Left -> Root -> Right)
@@ -461,6 +478,9 @@ root.right.right = TreeNode(7)
 
 print("Preorder :", end=" ")
 preorder(root)
+
+print("\nIterative Preorder :", end=" ")
+iterative_preorder(root)
 
 print("\nInorder  :", end=" ")
 inorder(root)
