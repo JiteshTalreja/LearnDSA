@@ -411,6 +411,25 @@ def inorder(root):
 
     inorder(root.right)
 
+#######################################################
+# ITERATIVE INORDER (Left -> Root -> Right)
+#######################################################
+
+def iterative_indorder(root):
+    if root is None:
+        return 
+
+    stack = []
+    current = root
+
+    while stack or current:
+
+        while current:
+            stack.append(current)
+            current = current.left
+        current = stack.pop()
+        print(current.val, end=" ")
+        current =current.right
 
 #######################################################
 # POSTORDER (Left -> Right -> Root)
@@ -425,6 +444,27 @@ def postorder(root):
     postorder(root.right)
 
     print(root.val, end=" ")
+
+#######################################################
+# ITERATIVE POSTORDER (Left -> Right -> Root)
+#######################################################
+
+def iterative_postorder(root):
+    stack1 = [root]
+    stack2 = []
+
+    while stack1:
+        node = stack1.pop()
+        stack2.append(node)
+
+        if node.left:
+            stack1.append(node.left)
+        if node.right:
+            stack1.append(node.right)
+
+    while stack2:
+        print(stack2.pop().val, end=" ")
+
 
 
 #######################################################
@@ -485,8 +525,14 @@ iterative_preorder(root)
 print("\nInorder  :", end=" ")
 inorder(root)
 
+print("\nIterative Inorder :", end=" ")
+iterative_indorder(root)
+
 print("\nPostorder:", end=" ")
 postorder(root)
+
+print("\nIterative Postorder:", end=" ")
+iterative_postorder(root)
 
 print("\nLevelOrder:", end=" ")
 level_order(root)
