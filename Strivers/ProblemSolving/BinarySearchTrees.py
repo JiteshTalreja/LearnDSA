@@ -446,7 +446,7 @@ def postorder(root):
     print(root.val, end=" ")
 
 #######################################################
-# ITERATIVE POSTORDER (Left -> Right -> Root)
+# ITERATIVE POSTORDER (Left -> Right -> Root) using 2 Stacks
 #######################################################
 
 def iterative_postorder(root):
@@ -465,7 +465,28 @@ def iterative_postorder(root):
     while stack2:
         print(stack2.pop().val, end=" ")
 
+#######################################################
+# ITERATIVE POSTORDER (Left -> Right -> Root) using 1 Stacks
+#######################################################
 
+def iterative_postorder_1(root):
+    stack =[]
+    curr = root
+    last_visited = None
+
+    while stack or curr:
+
+        while curr:
+            stack.append(curr)
+            curr = curr.left
+
+        peek = stack[-1]
+
+        if peek.right and last_visited != peek.right:
+            curr = peek.right
+        else:
+            print(peek.val, end=' ')
+            last_visited = stack.pop()
 
 #######################################################
 # LEVEL ORDER (BFS)
@@ -533,6 +554,9 @@ postorder(root)
 
 print("\nIterative Postorder:", end=" ")
 iterative_postorder(root)
+
+print("\nIterative Postorder 1 stack:", end=" ")
+iterative_postorder_1(root)
 
 print("\nLevelOrder:", end=" ")
 level_order(root)
