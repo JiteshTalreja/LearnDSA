@@ -489,6 +489,39 @@ def iterative_postorder_1(root):
             last_visited = stack.pop()
 
 #######################################################
+# PREORDER INORDER POSTORDER IN ONE
+#######################################################
+
+def all_traversals(root):
+    if root is None:
+        return [], [], []
+
+    preorder = []
+    inorder = []
+    postorder = []
+
+    stack =[(root, 1)]
+
+    while stack:
+        node, state = stack.pop()
+
+        if state == 1:
+            preorder.append(node.val)
+            stack.append((node, 2))
+            if node.left:
+                stack.append((node.left, 1))
+        elif state ==2:
+            inorder.append(node.val)
+
+            stack.append((node, 3))
+
+            if node.right:
+                stack.append((node.right, 1))
+        else:
+            postorder.append(node.val)
+    return preorder, inorder, postorder
+
+#######################################################
 # LEVEL ORDER (BFS)
 #######################################################
 
@@ -560,3 +593,6 @@ iterative_postorder_1(root)
 
 print("\nLevelOrder:", end=" ")
 level_order(root)
+
+print("\n All Traversals :", end=" ")
+print(all_traversals(root))
