@@ -489,7 +489,7 @@ def iterative_postorder_1(root):
             last_visited = stack.pop()
 
 #######################################################
-# PREORDER INORDER POSTORDER IN ONE
+# ALL TRAVERSALS
 #######################################################
 
 def all_traversals(root):
@@ -543,6 +543,19 @@ def level_order(root):
         if node.right:
             queue.append(node.right)
 
+#######################################################
+# Maximum Depth in Binary Tree
+#######################################################
+
+def max_depth(root):
+
+    if root is None:
+        return 0
+
+    lmax = max_depth(root.left)
+    rmax = max_depth(root.right)
+
+    return 1+max(lmax, rmax)
 
 #######################################################
 # Example Tree
@@ -596,3 +609,6 @@ level_order(root)
 
 print("\n All Traversals :", end=" ")
 print(all_traversals(root))
+
+print("\n max depth :", end=" ")
+print(max_depth(root))
