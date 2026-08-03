@@ -582,6 +582,28 @@ def is_balanced(root):
     return dfs(root) != -1
 
 #######################################################
+# L16. Diameter of Binary Tree
+#######################################################
+
+def diameter(root):
+
+    diameter = 0
+
+    def dfs(node):
+        nonlocal diameter
+        if node is None:
+            return 0
+
+        left = dfs(node.left)
+        right = dfs(node.right)
+
+        diameter = max(diameter, left+right)
+
+        return max(left, right)+1
+    dfs(root)
+    return diameter
+
+#######################################################
 # Example Tree
 #######################################################
 
