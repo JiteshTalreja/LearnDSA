@@ -604,6 +604,12 @@ def diameter(root):
     return diameter
 
 #######################################################
+# L17. Maximum Path Sum in Binary Tree 
+#######################################################
+
+
+
+#######################################################
 # Example Tree
 #######################################################
 
@@ -658,3 +664,6 @@ print(all_traversals(root))
 
 print("\n max depth :", end=" ")
 print(max_depth(root))
+
+print("\n diameter :", end="")
+print(diameter(root))
