@@ -609,7 +609,7 @@ def diameter(root):
 
 def max_path(root):
 
-    max_path = float(-inf)
+    max_path = float("-inf")
 
     def dfs(node):
         nonlocal max_path
