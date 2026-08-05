@@ -607,7 +607,23 @@ def diameter(root):
 # L17. Maximum Path Sum in Binary Tree 
 #######################################################
 
+def max_path(root):
 
+    max_path = float(-inf)
+
+    def dfs(node):
+        nonlocal max_path
+        if node is None:
+            return 0
+
+        left = max(0, dfs(node.left))
+        right = max(0, dfs(node.right))
+
+        max_path = max(max_path, left + right + node.val)
+
+        return max(left, right)+node.val
+    dfs(root)
+    return max_path
 
 #######################################################
 # Example Tree
@@ -667,3 +683,6 @@ print(max_depth(root))
 
 print("\n diameter :", end="")
 print(diameter(root))
+
+print("\n max_path :", end="")
+print(max_path(root))
