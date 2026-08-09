@@ -626,6 +626,21 @@ def max_path(root):
     return max_path
 
 #######################################################
+# L18. Check it two trees are Identical or Not  
+#######################################################
+
+def is_identical(root1, root2):
+
+    if root1 is None and root2 is None:
+        return True
+    if root1 is None or root2 is None:
+        return False
+
+    if root1.val != root2.val:
+        return False
+    return (is_identical(root1.left, root2.left) and is_identical(root1.right, root2.right)) 
+
+#######################################################
 # Example Tree
 #######################################################
 
@@ -645,6 +660,17 @@ root.left.right = TreeNode(5)
 
 root.right.left = TreeNode(6)
 root.right.right = TreeNode(7)
+
+root2 = TreeNode(1)
+
+root2.left = TreeNode(2)
+root2.right = TreeNode(3)
+
+root2.left.left = TreeNode(4)
+root2.left.right = TreeNode(5)
+
+root2.right.left = TreeNode(6)
+root2.right.right = TreeNode(8)
 
 
 #######################################################
@@ -686,3 +712,6 @@ print(diameter(root))
 
 print("\n max_path :", end="")
 print(max_path(root))
+
+print("\n is_identical :", end="")
+print(is_identical(root, root2))
