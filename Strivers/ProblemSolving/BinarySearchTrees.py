@@ -661,12 +661,67 @@ def zigzag_traversal(root):
             if node.right:
                 queue.append(node.right)
 
-            if not left_to_right:
-                level.reverse()
+        if not left_to_right:
+            level.reverse()
         res.append(level)
         left_to_right = not left_to_right
     return res
 
+#######################################################
+# L20. Boundary Traversal in Binary Tree  
+#######################################################
+
+def boundary_traversal(root):
+
+    if root is None:
+        return []
+
+    def is_leaf(node):
+        return node.left is None and node.right is None
+
+    if is_leaf(root):
+        return [root.val]
+    
+    ans = [root.val]
+
+    def left_boundary(node):
+        while node:
+            if not is_leaf(node):
+                ans.append(node.val)
+            if node.left:
+                node = node.left
+            else:
+                node=node.right
+
+    def right_boundary(node):
+        temp = []
+
+        while node:
+
+            if not is_leaf(node):
+                temp.append(node.val)
+            if node.right:
+                node = node.right
+            else:
+                node=node.left
+        ans.extend(temp[::-1])
+    def add_leaf(node):
+        if node is None:
+            return
+
+        if is_leaf(node):
+            ans.append(node.val)
+            return
+
+        add_leaf(node.left)
+        add_leaf(node.right)
+
+    left_boundary(root.left)
+
+    add_leaf(root)
+
+    right_boundary(root.right)
+    return ans
 
 #######################################################
 # Example Tree
@@ -746,3 +801,6 @@ print(is_identical(root, root2))
 
 print("\n zigzag traversal :", end="")
 print(zigzag_traversal(root))
+
+print("\n boundary traversal :", end="")
+print(boundary_traversal(root))
