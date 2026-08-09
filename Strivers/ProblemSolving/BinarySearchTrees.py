@@ -641,6 +641,34 @@ def is_identical(root1, root2):
     return (is_identical(root1.left, root2.left) and is_identical(root1.right, root2.right)) 
 
 #######################################################
+# L19. Zig-Zag or Spiral Traversal in Binary Tree  
+#######################################################
+
+def zigzag_traversal(root):
+
+    queue = deque([root])
+    res = []
+    left_to_right = True
+    while queue:
+        level = []
+
+        for _ in range(len(queue)):
+            node = queue.popleft()
+            level.append(node.val)
+
+            if node.left:
+                queue.append(node.left)
+            if node.right:
+                queue.append(node.right)
+
+            if not left_to_right:
+                level.reverse()
+        res.append(level)
+        left_to_right = not left_to_right
+    return res
+
+
+#######################################################
 # Example Tree
 #######################################################
 
@@ -715,3 +743,6 @@ print(max_path(root))
 
 print("\n is_identical :", end="")
 print(is_identical(root, root2))
+
+print("\n zigzag traversal :", end="")
+print(zigzag_traversal(root))
