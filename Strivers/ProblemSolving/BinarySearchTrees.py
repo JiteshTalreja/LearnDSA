@@ -724,6 +724,44 @@ def boundary_traversal(root):
     return ans
 
 #######################################################
+# L21. Vertical Order Traversal of Binary Tree   
+#######################################################
+
+def vertical_traversal(root):
+    if root is None:
+        return []
+
+    queue = deque([(root, 0, 0)])
+    columns = {}
+
+    while queue:
+        node, row, col = queue.popleft()
+
+        if col not in columns:
+            columns[col] = []
+
+        columns[col].append((row, node.val))
+
+        if node.left:
+            queue.append((node.left, row+1, col-1))
+        if node.right:
+            queue.append((node.right, row+1, col+1))
+
+    ans = []
+    for cols in sorted(columns):
+        nodes = columns[cols]
+
+        nodes.sort()
+
+        level = []
+
+        for row, val in nodes:
+            level.append(val)
+
+        ans.append(level)
+    return ans
+
+#######################################################
 # Example Tree
 #######################################################
 
@@ -805,3 +843,5 @@ print(zigzag_traversal(root))
 print("\n boundary traversal :", end="")
 print(boundary_traversal(root))
 
+print("\n vertical traversal :", end="")
+print(vertical_traversal(root))
