@@ -762,6 +762,36 @@ def vertical_traversal(root):
     return ans
 
 #######################################################
+# L22. Top View of Binary Tree  
+#######################################################
+
+def top_view(root):
+    if root is None:
+        return []
+
+    queue = deque([(root, 0)])
+    levels = {}
+
+    while queue:
+        node, col = queue.popleft()
+
+        if col not in levels:
+            levels[col] = (col, node.val)
+
+        if node.left:
+            queue.append((node.left, col-1))
+        if node.right:
+            queue.append((node.right, col+1))
+
+    ans = []
+    for cols in sorted(levels):
+        ans.append(levels[cols])
+
+    return ans
+
+        
+
+#######################################################
 # Example Tree
 #######################################################
 
@@ -845,3 +875,6 @@ print(boundary_traversal(root))
 
 print("\n vertical traversal :", end="")
 print(vertical_traversal(root))
+
+print("\n top view :", end="")
+print(top_view(root))
