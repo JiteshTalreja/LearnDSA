@@ -790,7 +790,7 @@ def top_view(root):
     return ans
 
 #######################################################
-# L22. Top View of Binary Tree  
+# L23. Bottom View of Binary Tree  
 #######################################################
 
 def bottom_view(root):
@@ -815,6 +815,41 @@ def bottom_view(root):
         ans.append(levels[cols])
 
     return ans
+
+#######################################################
+# L24. Right/Left View of Binary Tree
+#######################################################
+
+def right_view(root):
+    ans = []
+
+    def traverse(node, level):
+        if node is None:
+            return
+
+        if level == len(ans):
+            ans.append(node.val)
+
+        traverse(node.right, level+1)
+        traverse(node.left, level+1)
+    traverse(root, 0)
+    return ans
+
+def left_view(root):
+    ans = []
+
+    def traverse(node, level):
+        if node is None:
+            return
+
+        if level == len(ans):
+            ans.append(node.val)
+
+        traverse(node.left, level+1)
+        traverse(node.right, level+1)
+    traverse(root, 0)
+    return ans
+
 
 #######################################################
 # Example Tree
@@ -906,3 +941,9 @@ print(top_view(root))
 
 print("\n bottom view :", end="")
 print(bottom_view(root))
+
+print("\n right view :", end="")
+print(right_view(root))
+
+print("\n left view :", end="")
+print(left_view(root))
