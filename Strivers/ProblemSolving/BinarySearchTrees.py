@@ -850,6 +850,29 @@ def left_view(root):
     traverse(root, 0)
     return ans
 
+#######################################################
+# L25. Check for Symmetrical Binary Trees
+#######################################################
+
+def is_symmetric(root):
+    if root is None:
+        return True
+
+    def mirror(left, right):
+        if left is None and right is None:
+            return True
+        if left is None or right is None:
+            return False
+
+        if left.val != right.val:
+            return False
+
+        return (
+            mirror(left.left, right.right)
+            and 
+            mirror(left.right and right.left)
+        )
+    return mirror(root.left, root.right)
 
 #######################################################
 # Example Tree
@@ -947,3 +970,6 @@ print(right_view(root))
 
 print("\n left view :", end="")
 print(left_view(root))
+
+print("\n is symmetric:", end="")
+print(is_symmetric(root))
