@@ -875,6 +875,30 @@ def is_symmetric(root):
     return mirror(root.left, root.right)
 
 #######################################################
+# L26. Print Root to Node Path in Binary Tree
+#######################################################
+
+def root_to_node_path(root, target):
+    ans = []
+
+    def dfs(node):
+        if node is None:
+            return False
+
+        ans.append(node.val)
+
+        if node.val == target:
+            return True
+
+        if dfs(node.left) or dfs(node.right):
+            return True
+
+        ans.pop()
+        return False
+    dfs(root)
+    return ans
+
+#######################################################
 # Example Tree
 #######################################################
 
@@ -973,3 +997,6 @@ print(left_view(root))
 
 print("\n is symmetric:", end="")
 print(is_symmetric(root))
+
+print("\n root to node path:", end="")
+print(root_to_node_path(root, 6))
