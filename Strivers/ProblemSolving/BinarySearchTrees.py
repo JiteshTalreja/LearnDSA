@@ -899,6 +899,27 @@ def root_to_node_path(root, target):
     return ans
 
 #######################################################
+# L27. Lowest Common Ancestor in Binary Tree
+#######################################################
+
+def lca(root, num1, num2):
+
+    if root is None:
+        return
+
+    if root.val == num1 or root.val == num2:
+        return root
+
+    left = lca(root.left, num1, num2)
+    right = lca(root.right, num1, num2)
+
+    if left and right:
+        return root
+    if left:
+        return left
+    return right
+
+#######################################################
 # Example Tree
 #######################################################
 
@@ -1000,3 +1021,6 @@ print(is_symmetric(root))
 
 print("\n root to node path:", end="")
 print(root_to_node_path(root, 6))
+
+print("\n Lowest Common Ancestor :", end="")
+print(lca(root, 5, 6))
