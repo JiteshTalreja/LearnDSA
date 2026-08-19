@@ -920,6 +920,39 @@ def lca(root, num1, num2):
     return right
 
 #######################################################
+# L28. Maximum Width of Binary Tree
+#######################################################
+
+def max_width(root):
+    if root is None:
+        return 0
+
+    queue = deque([(root, 0)])
+    max_width = 0
+
+    while queue:
+        first =0
+        last = 0
+        level_start = queue[0][1]
+        level_size = len(queue)
+
+        for i in range(len(queue)):
+            node, index = queue.popleft()
+
+            index -= level_start
+            if i == 0:
+                first = index
+            if i == level_size-1:
+                last = index
+            if node.left:
+                queue.append((node.left, 2*index+1))
+            if node.right:
+                queue.append((node.right, 2*index+2))
+        max_width = max(max_width, last-first+1)
+    return max_width
+
+
+#######################################################
 # Example Tree
 #######################################################
 
@@ -1024,3 +1057,6 @@ print(root_to_node_path(root, 6))
 
 print("\n Lowest Common Ancestor :", end="")
 print(lca(root, 5, 6))
+
+print("\n max width :", end="")
+print(max_width(root))
