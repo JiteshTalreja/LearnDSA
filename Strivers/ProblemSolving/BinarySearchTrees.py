@@ -951,6 +951,49 @@ def max_width(root):
         max_width = max(max_width, last-first+1)
     return max_width
 
+#######################################################
+# L29. Children Sum Property in Binary Tree
+#Self Notes 📜:
+#🥥 if both children sum is less than parent, make children's value to parent's value.
+#🥥 if both children values sum is greater than or equal to parent, make parent's value to children's sum.
+#🥥 recursively go left and right. Traversal type: DFS.
+#🥥 when coming back up the tree, take children sum and replace it in parent.
+#🥥 at any point we reach null, just return (base case)
+#🥥 Intuition: while going down, increase the children values so we make sure to never fall short, then all we have to do is sum both children and replace it in parent.
+#######################################################
+
+def children_sum(root):
+
+    if root is None:
+        return 
+
+    child = 0
+
+    if root.left:
+        child += root.left.val
+    if root.right:
+        child += root.right.val
+
+    if child >= root.val:
+        root.val = child
+    else:
+        if root.left:
+            root.left.val = root.val
+        if root.right:
+            root.right.val = root.val
+
+    children_sum(root.left)
+    children_sum(root.right)
+
+    total = 0
+
+    if root.left:
+        total += root.left.val
+    if root.right:
+        total += root.right.val
+    if root.left or root.right:
+        root.val = total
+
 
 #######################################################
 # Example Tree
