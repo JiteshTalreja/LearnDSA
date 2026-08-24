@@ -994,6 +994,48 @@ def children_sum(root):
     if root.left or root.right:
         root.val = total
 
+#######################################################
+# L30. Print all the Nodes at a distance of K in Binary Tree 
+#######################################################
+
+def distance_k(root, target, k):
+
+    if root is None:
+        return []
+
+    parents = {root: None}
+    queue = deque([root])
+
+    while queue:
+        node = queue.popleft()
+        if node.left:
+            parents[node.left] = node
+            queue.append(node.left)
+        if node.right:
+            parents[node.right] = node
+            queue.append(node.right)
+
+    targetqueue = deque([target])
+    distance = 0
+    visited = {target}
+
+    while targetqueue:
+
+        if distance == k:
+            return [node.val for node in targetqueue]
+        for _ in range(len(targetqueue)):
+            node = targetqueue.popleft()
+            neighbors = [
+                node.left,
+                node.right,
+                parents[node]            
+            ]
+            for neighbor in neighbors:
+                if neighbor and neighbor not in visited:
+                    visited.add(neighbor)
+                    targetqueue.append(neighbor)
+        distance +=1
+    return []
 
 #######################################################
 # Example Tree
@@ -1027,6 +1069,7 @@ root2.left.right = TreeNode(5)
 root2.right.left = TreeNode(6)
 root2.right.right = TreeNode(8)
 
+just_node = root.left
 
 #######################################################
 # Driver
@@ -1103,3 +1146,6 @@ print(lca(root, 5, 6))
 
 print("\n max width :", end="")
 print(max_width(root))
+
+print("\n distance from node k  :", end="")
+print(distance_k(root, just_node, 1))
