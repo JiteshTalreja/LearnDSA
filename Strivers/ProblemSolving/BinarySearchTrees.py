@@ -1038,6 +1038,57 @@ def distance_k(root, target, k):
     return []
 
 #######################################################
+# L31. Minimum time taken to BURN the Binary Tree from a Node
+#######################################################
+
+def burn(root, target):
+    if root is None:
+        return 0
+
+    parents = {root: None}
+    queue = deque([root])
+    target_node = None
+
+    while queue:
+        node = queue.popleft()
+
+        if node.val == target:
+            target_node = node
+
+        if node.left:
+            parents[node.left] = node
+            queue.append(node.left)
+        if node.right:
+            parents[node.right] = node
+            queue.append(node.right)
+
+    targetqueue = deque([target_node])
+    time = 0
+    visited = {target_node}
+
+    while targetqueue:
+
+        burned_new_node = False
+
+        for _ in range(len(targetqueue)):
+            node  = targetqueue.popleft()
+
+            neighbors = [
+                node.left,
+                node.right,
+                parents[node]
+            ]
+            for neighbor in neighbors:
+                if neighbor and neighbor not in visited:
+                    visited.add(neighbor)
+                    targetqueue.append(neighbor)
+                    burned_new_node = True
+
+        if burned_new_node:
+            time +=1
+    return time
+
+#######################################################
 # Example Tree
 #######################################################
 
@@ -1149,3 +1200,6 @@ print(max_width(root))
 
 print("\n distance from node k  :", end="")
 print(distance_k(root, just_node, 1))
+
+print("\n time to burn  :", end="")
+print(burn(root, 2))
