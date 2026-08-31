@@ -1119,6 +1119,38 @@ def count_nodes(root):
     return 1 + count_nodes(root.left) + count_nodes(root.right)
 
 #######################################################
+# L34. Construct a Binary Tree from Preorder and Inorder Traversal 
+#######################################################
+
+def build_tree(inorder, preorder):
+
+    inorder_map = {}
+
+    for i in range(len(inorder)):
+        inorder_map[inorder[i]] = i
+
+    pre_index= 0
+
+    def build(left, right):
+        nonlocal pre_index
+        if left> right :
+            return
+
+        root_val = preorder[pre_index]
+        root = TreeNode(root_val)
+        pre_index +=1
+
+        inorder_index = inorder_map[root_val]
+
+        root.left = build(left, inorder_index-1)
+        root.right = build(inorder_index+1, right)
+
+        return root
+
+    return build(0, len(inorder)-1)
+
+
+#######################################################
 # Example Tree
 #######################################################
 
@@ -1236,3 +1268,7 @@ print(burn(root, 2))
 
 print("\n number of nodes  :", end="")
 print(count_nodes(root))
+
+
+print("\n build tree  :", end="")
+print(build_tree([4,2,5,1,6,3,7], [1, 2, 4, 5, 3, 6, 7]))
