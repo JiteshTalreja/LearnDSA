@@ -1149,6 +1149,36 @@ def build_tree(inorder, preorder):
 
     return build(0, len(inorder)-1)
 
+#######################################################
+# L35. Construct the Binary Tree from Postorder and Inorder Traversal  
+#######################################################
+
+def build_tree2(inorder, postorder):
+    inorder_map = {}
+
+    for i in range(len(inorder)):
+        inorder_map[inorder[i]] = i
+
+    post_index = -1
+
+    def build(left, right):
+        nonlocal post_index
+
+        if left> right:
+            return
+
+        root_val = postorder[post_index]
+
+        root = TreeNode(root_val)
+        inorder_index = inorder_map[root_val]
+        post_index -=1
+
+        root.right = build(inorder_index+1, right)
+        root.left = build(left, inorder_index-1)
+        
+        return root
+    return build(0, len(inorder)-1)
+
 
 #######################################################
 # Example Tree
@@ -1270,5 +1300,8 @@ print("\n number of nodes  :", end="")
 print(count_nodes(root))
 
 
-print("\n build tree  :", end="")
+print("\n build tree inorder preorder :", end="")
 print(build_tree([4,2,5,1,6,3,7], [1, 2, 4, 5, 3, 6, 7]))
+
+print("\n build tree 2 inorder postorder :", end="")
+print(build_tree2([4,2,5,1,6,3,7], [4, 5, 2, 6, 7, 3, 1]))
