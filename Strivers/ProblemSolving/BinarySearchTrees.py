@@ -1179,6 +1179,58 @@ def build_tree2(inorder, postorder):
         return root
     return build(0, len(inorder)-1)
 
+#######################################################
+# L36. Serialize and De-serialize Binary Tree  
+#######################################################
+
+def serialize(root):
+
+    if root is None:
+        return ""
+
+    queue = deque([root])
+    result = []
+
+    while queue:
+        node = queue.popleft()
+
+        if node is None:
+            result.append('#')
+
+        else:
+            result.append(str(node.val))
+            queue.append(node.left)
+            queue.append(node.right)
+    return ",".join(result)
+
+def deseriailze(data):
+
+    if not data:
+        return None
+
+    values = data.split(',')
+
+    root = TreeNode(int(values[0]))
+
+    queue = deque([root])
+
+    index = 1
+
+    while queue:
+        node = queue.popleft()
+
+        if values[index] != "#":
+            node.left = TreeNode(int(values[index]))
+            queue.append(node.left)
+
+        index +=1
+
+        if values[index] != "#":
+            node.right = TreeNode(int(values[index]))
+            queue.append(node.right)
+
+        index +=1
+    return root
 
 #######################################################
 # Example Tree
