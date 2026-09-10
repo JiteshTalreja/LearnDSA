@@ -1233,6 +1233,64 @@ def deseriailze(data):
     return root
 
 #######################################################
+# L37. Morris Traversal | Preorder | Inorder 
+#######################################################
+
+def morris_inorder(root):
+    result = []
+    current = root
+
+    while current:
+
+        if current.left is None:
+            result.append(current.val)
+            current= current.right
+
+        else:
+            predecessor = current.left
+
+            while predecessor.right and predecessor.right != current:
+                predecessor = predecessor.right
+
+            if predecessor.right is None:
+                predecessor.right = current
+                current = current.left
+
+            else:
+                predecessor.right = None
+                result.append(current.val)
+                current = current.right
+    return result
+
+def morris_preorder(root):
+
+    result = []
+    current = root
+
+    while current:
+
+        if current.left is None:
+            result.append(current.val)
+            current = current.right
+
+        else:
+            predecessor = current.left
+
+            while predecessor.right and predecessor.right != current:
+                predecessor = predecessor.right
+
+            if predecessor.right is None:
+                result.append(current.val)
+                predecessor.right = current
+                current = current.left
+
+            else:
+                predecessor.right = None
+                current = current.right
+    return result
+
+
+#######################################################
 # Example Tree
 #######################################################
 
@@ -1357,3 +1415,9 @@ print(build_tree([4,2,5,1,6,3,7], [1, 2, 4, 5, 3, 6, 7]))
 
 print("\n build tree 2 inorder postorder :", end="")
 print(build_tree2([4,2,5,1,6,3,7], [4, 5, 2, 6, 7, 3, 1]))
+
+print("\ morris Inorder :", end=" ")
+print(morris_inorder(root))
+
+print("\ morris preorder :", end=" ")
+print(morris_preorder(root))
