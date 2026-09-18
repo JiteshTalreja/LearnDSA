@@ -1289,6 +1289,28 @@ def morris_preorder(root):
                 current = current.right
     return result
 
+#######################################################
+# L38. Flatten a Binary Tree to Linked List 
+#######################################################
+
+def flatten(root):
+
+    prev = None
+
+    def dfs(node):
+        nonlocal prev
+
+        if node is None:
+            return
+
+        dfs(node.right)
+        dfs(node.left)
+
+        node.right = prev
+        node.left = None
+
+        prev = node
+    dfs(root)
 
 #######################################################
 # Example Tree
