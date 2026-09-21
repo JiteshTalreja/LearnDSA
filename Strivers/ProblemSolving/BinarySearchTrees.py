@@ -1313,6 +1313,133 @@ def flatten(root):
     dfs(root)
 
 #######################################################
+# L39. Introduction to Binary Search Tree  
+#######################################################
+
+# 1. BST (Binary Search Tree)
+#    - A binary tree with an ordering property.
+#    - For every node:
+#         Left subtree values < Node value
+#         Right subtree values > Node value
+#
+#    Example:
+#
+#             8
+#           /   \
+#          5     12
+#         / \    / \
+#        3   7  10  15
+
+
+# 2. Binary Tree vs BST
+#    - Binary Tree:
+#         Each node has at most 2 children.
+#         No ordering property required.
+#
+#    - BST:
+#         Must follow:
+#             Left < Root < Right
+
+
+# 3. Inorder Traversal
+#    - Inorder = Left → Root → Right
+#    - Inorder traversal of a BST gives values in SORTED order.
+#
+#         BST:
+#              8
+#            /   \
+#           5     12
+#
+#         Inorder:
+#             5, 8, 12
+
+
+# 4. Searching in BST
+#    - Compare target with current node.
+#    - target == node.val → Found
+#    - target < node.val   → Go LEFT
+#    - target > node.val   → Go RIGHT
+#
+#    - We don't need to search both subtrees.
+
+
+# 5. Insert in BST
+#    - Compare value with current node.
+#    - value < node.val → go LEFT
+#    - value > node.val → go RIGHT
+#    - Insert when we reach an empty position.
+
+
+# 6. Minimum Value
+#    - Minimum value is the LEFTMOST node.
+#    - Keep moving left until node.left is None.
+
+
+# 7. Maximum Value
+#    - Maximum value is the RIGHTMOST node.
+#    - Keep moving right until node.right is None.
+
+
+# 8. BST Height / Complexity
+#    - Balanced BST:
+#         Height ≈ log(n)
+#         Search / Insert / Delete → O(log n)
+#
+#    - Skewed BST:
+#         Height ≈ n
+#         Search / Insert / Delete → O(n)
+
+
+# 9. Inorder Successor
+#    - The next larger value than a given node.
+#
+#         predecessor < node < successor
+#
+#    - Example:
+#         Inorder: 3, 5, 7, 8, 10, 12, 15
+#         Successor of 8 = 10
+
+
+# 10. Inorder Predecessor
+#     - The next smaller value than a given node.
+#
+#         Example:
+#         Inorder: 3, 5, 7, 8, 10, 12, 15
+#         Predecessor of 8 = 7
+
+
+# 11. LCA in BST
+#     - We can use the BST property.
+#
+#     - If both values < root:
+#           Go LEFT
+#
+#     - If both values > root:
+#           Go RIGHT
+#
+#     - Otherwise:
+#           Current root is the LCA.
+
+
+# 12. Important BST Properties to Remember
+#
+#     LEFT < ROOT < RIGHT
+#
+#     Inorder traversal → SORTED ORDER
+#
+#     Minimum → LEFTMOST
+#
+#     Maximum → RIGHTMOST
+#
+#     Smaller than root → LEFT
+#
+#     Larger than root → RIGHT
+#
+#     Balanced BST → O(log n)
+#
+#     Skewed BST → O(n)
+
+#######################################################
 # Example Tree
 #######################################################
 
