@@ -1440,6 +1440,23 @@ def flatten(root):
 #     Skewed BST → O(n)
 
 #######################################################
+# L40. Search in a Binary Search Tree | BST | 
+#######################################################
+
+def search_bst(root, target):
+
+    if root is None:
+        return 
+
+    if root.val == target:
+        return root
+
+    if root.val < target:
+        return search_bst(root.right, target)
+    else:
+        return search_bst(root.left, target)
+
+#######################################################
 # Example Tree
 #######################################################
 
