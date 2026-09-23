@@ -1457,6 +1457,26 @@ def search_bst(root, target):
         return search_bst(root.left, target)
 
 #######################################################
+# L41. Ceil in a Binary Search Tree | BST 
+#######################################################
+
+def find_ceil(root, target):
+
+    ceil = -1
+
+    while root:
+        if root.val == target:
+            ceil = root.val
+            return ceil
+
+        if root.val < target:
+            root = root.right
+        else:
+            ceil = root.val
+            root = root.left
+    return ceil
+
+#######################################################
 # Example Tree
 #######################################################
 
