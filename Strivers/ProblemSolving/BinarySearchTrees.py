@@ -1477,6 +1477,25 @@ def find_ceil(root, target):
     return ceil
 
 #######################################################
+# L42. Floor in a Binary Search Tree | BST 
+#######################################################
+
+def find_floor(root, target):
+
+    floor = -1
+
+    while root:
+        if root.val == target:
+            return root.val
+
+        if root.val < target:
+            floor = root.val
+            root= root.right
+        else:
+            root = root.left
+    return floor
+
+#######################################################
 # Example Tree
 #######################################################
 
