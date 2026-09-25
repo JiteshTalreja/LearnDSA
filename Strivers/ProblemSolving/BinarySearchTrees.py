@@ -1496,6 +1496,22 @@ def find_floor(root, target):
     return floor
 
 #######################################################
+# L43. Insert a given Node in Binary Search Tree 
+#######################################################
+
+def insert_bst(root, val):
+
+    if root is None:
+        return TreeNode(val)
+
+    if val < root.val:
+        root.left = insert_bst(root.left, val)
+    else:
+        root.right = insert_bst(root.right, val)
+
+    return root
+
+#######################################################
 # Example Tree
 #######################################################
 
