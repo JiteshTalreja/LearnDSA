@@ -1558,7 +1558,6 @@ def find_last_right(node):
         while node.right:
             node = node.right
         return node
-    
 
 #######################################################
 # Example Tree
