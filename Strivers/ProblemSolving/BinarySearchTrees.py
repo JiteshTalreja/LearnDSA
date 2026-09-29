@@ -1512,6 +1512,55 @@ def insert_bst(root, val):
     return root
 
 #######################################################
+# L44. Delete a Node in Binary Search Tree
+#######################################################
+
+def delete_node_bst(root, key):
+
+    if root is None:
+        return 
+
+    if root.val == key:
+        return helper(root)
+
+    dummy = root
+
+    while root:
+        if key< root.val:
+            if root.left and root.left.val == key:
+                root.left = helper(root.left)
+                break
+            root = root.left
+        else:
+            if root.right and root.right.val == key:
+                root.right = helper(root.right)
+                break
+            root = root.right
+    return dummy
+
+
+def helper(node):
+
+        if node.left is None:
+            return node.right
+        if node.right is None:
+            return node.left
+
+        right_child = node.right
+        last_right_child = find_last_right(node.left)
+        last_right_child.right = right_child
+
+        return node.left
+
+
+
+def find_last_right(node):
+        while node.right:
+            node = node.right
+        return node
+    
+
+#######################################################
 # Example Tree
 #######################################################
 
