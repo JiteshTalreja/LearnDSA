@@ -1560,6 +1560,55 @@ def find_last_right(node):
         return node
 
 #######################################################
+# L45. K-th Smallest/Largest Element in BST
+#######################################################
+
+def kth_smallest(root, k):
+
+    count = 0
+    answer = None
+
+    def inorder(node):
+        nonlocal count, answer
+
+        if node is None:
+            return 
+
+        inorder(node.left)
+        count += 1
+        if count == k:
+            answer = node.val
+            return
+
+        inorder(node.right)
+    inorder(root)
+    return answer
+
+def kth_largest(root, k):
+    count = 0
+    answer = None
+
+    def inorder(node):
+        nonlocal count, answer
+
+        if node is None:
+            return
+
+        inorder(node.right)
+
+        count +=1
+
+        if count == k:
+            answer = node.val
+            return 
+
+        inorder(node.left)
+
+    inorder(root)
+    return answer
+
+
+#######################################################
 # Example Tree
 #######################################################
 
