@@ -1629,6 +1629,11 @@ def is_valid_bst(root):
         ) 
     return validate(root, float("-inf"), float("inf"))
         
+#######################################################
+# L46. Check if a tree is a BST or BT | Validate a BST
+#######################################################
+
+
 
 #######################################################
 # Example Tree
