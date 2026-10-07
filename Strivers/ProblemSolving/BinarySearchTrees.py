@@ -1633,7 +1633,17 @@ def is_valid_bst(root):
 # L46. Check if a tree is a BST or BT | Validate a BST
 #######################################################
 
+def lca_bst(root, p, q):
 
+    if root is None:
+        return None
+
+    if p < root.val and q < root.val:
+        return lca_bst(root.left, p, q)
+    if p > root.val and q > root.val:
+        return lca_bst(root.right, p, q)
+
+    return root
 
 #######################################################
 # Example Tree
