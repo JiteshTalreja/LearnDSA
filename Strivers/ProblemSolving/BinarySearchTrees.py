@@ -1630,7 +1630,7 @@ def is_valid_bst(root):
     return validate(root, float("-inf"), float("inf"))
         
 #######################################################
-# L46. Check if a tree is a BST or BT | Validate a BST
+# L47. LCA in a BST
 #######################################################
 
 def lca_bst(root, p, q):
@@ -1644,6 +1644,12 @@ def lca_bst(root, p, q):
         return lca_bst(root.right, p, q)
 
     return root
+
+#######################################################
+# L48. Construct a BST from a preorder traversal 
+#######################################################
+
+
 
 #######################################################
 # Example Tree
