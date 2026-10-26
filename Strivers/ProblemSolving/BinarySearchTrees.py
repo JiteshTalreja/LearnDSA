@@ -1649,7 +1649,24 @@ def lca_bst(root, p, q):
 # L48. Construct a BST from a preorder traversal 
 #######################################################
 
+def bst_from_preorder(preorder):
 
+    index = 0
+
+    def build(bound):
+        nonlocal index
+
+        if index == len(preorder) or preorder[index] > bound:
+            return None
+
+        root = TreeNode(preorder[index])
+        index+=1
+
+        root.left = build(root.val)
+        root.right = build(bound)
+
+        return root
+    return build(float("inf")) 
 
 #######################################################
 # Example Tree
