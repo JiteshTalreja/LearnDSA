@@ -1669,6 +1669,35 @@ def bst_from_preorder(preorder):
     return build(float("inf")) 
 
 #######################################################
+# L49. Inorder Successor/Predecessor in BST
+#######################################################
+
+def inorder_successor(root, key):
+    successor = None
+
+    while root:
+
+        if root.val > key:
+            successor = root
+            root = root.left
+        else:
+            root = root.right
+    return successor
+
+def inorder_predecessor(root, key):
+    predecessor = None
+
+    while root:
+        if root.val < key:
+            predecessor = root
+            root = root.right
+        else:
+            root = root.left
+    return predecessor
+
+
+
+#######################################################
 # Example Tree
 #######################################################
 
